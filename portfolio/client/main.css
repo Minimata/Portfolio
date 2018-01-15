@@ -1,0 +1,9 @@
+/* CSS declarations go here */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: whitesmoke;
+}

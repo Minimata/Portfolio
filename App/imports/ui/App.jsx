@@ -44,7 +44,6 @@ class App extends Component {
         )
     }
 
-
     handleSubmit(event) {
         event.preventDefault();
 
@@ -57,7 +56,6 @@ class App extends Component {
         //Clear form
         textInput.value = '';
     }
-
 
     toggleHideCompleted() {
         this.setState({
