@@ -2,25 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e484e27d-3a97-4605-b3b4-d70c427b87e7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_npm.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/lib/router.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/portfolio/imports/ui/App.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/portfolio/imports/ui/NavBar.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/portfolio/imports/ui/Task.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/portfolio/imports/ui/commonValues.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/.meteor/.finished-upgraders" afterPath="$PROJECT_DIR$/App/.meteor/.finished-upgraders" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/.meteor/packages" afterPath="$PROJECT_DIR$/App/.meteor/packages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/.meteor/release" afterPath="$PROJECT_DIR$/App/.meteor/release" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/.meteor/versions" afterPath="$PROJECT_DIR$/App/.meteor/versions" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/client/main.css" afterPath="$PROJECT_DIR$/App/client/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/client/main.jsx" afterPath="$PROJECT_DIR$/App/client/main.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/imports/ui/App.jsx" afterPath="$PROJECT_DIR$/App/imports/ui/App.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/package-lock.json" afterPath="$PROJECT_DIR$/App/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/package.json" afterPath="$PROJECT_DIR$/App/package.json" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/portfolio/imports/ui/commonValues.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/portfolio/imports/ui/App.js" afterPath="$PROJECT_DIR$/portfolio/imports/ui/App.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/portfolio/imports/ui/Task.js" afterPath="$PROJECT_DIR$/portfolio/imports/ui/Task.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,6 +16,28 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DockManager">
+    <window id="2">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="Task.js" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/portfolio/imports/ui/Task.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="119">
+                    <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+                    <folding>
+                      <element signature="e#0#38#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -44,58 +51,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/client/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1462">
-              <caret line="198" column="17" lean-forward="true" selection-start-line="198" selection-start-column="17" selection-end-line="198" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/portfolio/imports/ui/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="44" column="44" lean-forward="true" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+            <state relative-caret-position="510">
+              <caret line="30" column="37" lean-forward="false" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Task.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/portfolio/imports/ui/Task.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2431">
-              <caret line="143" column="38" lean-forward="true" selection-start-line="143" selection-start-column="38" selection-end-line="143" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/imports/ui/App.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Task.jsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/App/imports/ui/Task.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="29" column="32" lean-forward="true" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -109,6 +72,18 @@
         <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>li</find>
+      <find>li</find>
+      <find>div</find>
+      <find>;</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>a</replace>
+      <replace>,</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -126,9 +101,9 @@
         <option value="$PROJECT_DIR$/portfolio/imports/ui/common.js" />
         <option value="$PROJECT_DIR$/App/client/main.css" />
         <option value="$PROJECT_DIR$/portfolio/imports/ui/commonValues.js" />
-        <option value="$PROJECT_DIR$/portfolio/imports/ui/Task.js" />
-        <option value="$PROJECT_DIR$/portfolio/imports/ui/App.js" />
         <option value="$PROJECT_DIR$/App/imports/ui/App.jsx" />
+        <option value="$PROJECT_DIR$/portfolio/imports/ui/App.js" />
+        <option value="$PROJECT_DIR$/portfolio/imports/ui/Task.js" />
       </list>
     </option>
   </component>
@@ -148,7 +123,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/App/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="width" value="960" />
     <option name="height" value="1160" />
   </component>
@@ -280,21 +255,21 @@
       <updated>1516003459769</updated>
       <workItem from="1516003461242" duration="3676000" />
       <workItem from="1516008041767" duration="24000" />
-      <workItem from="1516008362587" duration="13365000" />
+      <workItem from="1516008362587" duration="24175000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17065000" />
+    <option name="totallyTimeSpent" value="27875000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <frame x="0" y="0" width="960" height="1160" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.114583336" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23305085" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -493,34 +468,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/portfolio/client/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/portfolio/imports/ui/Task.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2431">
-          <caret line="143" column="38" lean-forward="true" selection-start-line="143" selection-start-column="38" selection-end-line="143" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/portfolio/imports/ui/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="44" column="44" lean-forward="true" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/client/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1462">
@@ -541,9 +488,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/App/imports/ui/Task.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="29" column="32" lean-forward="true" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+        <state relative-caret-position="561">
+          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/portfolio/client/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/portfolio/imports/ui/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="37" lean-forward="false" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/portfolio/imports/ui/Task.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
