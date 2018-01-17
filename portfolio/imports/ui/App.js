@@ -27,8 +27,9 @@ export default class App extends Component {
     }
 
     renderTasks() {
+        let hex = {};
         return this.getTasks().map((task) => (
-            <Task key={task._id} task={task} flat={false} />
+            <Task key={task._id} task={task} hex={hex}/>
         ));
     }
 
@@ -44,6 +45,18 @@ export default class App extends Component {
                 <div id="navbar-main" className="nav">
                     {this.renderNav()}
                 </div>
+
+                <HexGrid>
+                    <li></li>
+                    <Task task={{text: "pizza!"}} hex={{}}/>
+                    <Task task={{text: "pizza!"}} hex={{}}/>
+                    <Task task={{text: "pizza!"}} hex={{}}/>
+                    <Task task={{text: "pizza!"}} hex={{}}/>
+                    <Task task={{text: "pizza!"}} hex={{}}/>
+                    <li></li>
+                    <Task task={{text: "pizza!"}} hex={{}}/>
+                    <Task task={{text: "pizza!"}} hex={{}}/>
+                </HexGrid>
 
                 <HexGrid>
                     {this.renderTasks()}
