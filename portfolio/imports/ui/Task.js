@@ -31,13 +31,13 @@ const Hexagon = styled('li')`
     -ms-transform: rotate(-60deg) skewY(30deg);
     transform: rotate(-60deg) skewY(30deg);
     
-    :nth-child(6n+4), :nth-child(6n+5), :nth-child(6n+6) {
+    &:nth-child(6n+4), &:nth-child(6n+5), &:nth-child(6n+6) {
         -webkit-transform: translateX(50%) rotate(-60deg) skewY(30deg);
         -ms-transform: translateX(50%) rotate(-60deg) skewY(30deg);
         transform: translateX(50%) rotate(-60deg) skewY(30deg);
     }
     
-    * {
+    & * {
         position:absolute;
         visibility:visible;
     }
@@ -45,18 +45,18 @@ const Hexagon = styled('li')`
 
 const HexLink = styled('a')`
     display:block;
-    color: ${props => props.color};
+    color: ${props => props.color} !important;
     -webkit-transform: skewY(-30deg) rotate(60deg);
     -ms-transform: skewY(-30deg) rotate(60deg);
     transform: skewY(-30deg) rotate(60deg);
     
-    > h1, > p {
-        background-color: ${props => props.backColor};
+    & > h1, & > p {
+        background-color: ${props => props.backColor} !important;
     }
 `;
 
 const HexImg = styled('img')`
-        margin:0 auto;
+    margin:0 auto;
 `;
 
 const HexText = css`

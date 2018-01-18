@@ -76,32 +76,31 @@ const HexGrid = styled('ul')`
     width:90%;
     margin:0 auto;
     
-    :after {
+    &:after {
         content:"";
         display:block;
         clear:both;
     }
     
-    li {
+    & li {
         width:27.85714285714286%; /* = (100-2.5) / 3.5 */
         padding-bottom: 32.16760145166612%; /* =  width /0.866 */
     }
     
-    
-    li:nth-child(3n+2){
+    & li:nth-child(3n+2){
         margin:0 1%;
     }
-    li:nth-child(6n+4){
+    & li:nth-child(6n+4){
         margin-left:0.5%;
     }
-    li:nth-child(6n+4), li:nth-child(6n+5), li:nth-child(6n+6) {
+    & li:nth-child(6n+4), li:nth-child(6n+5), li:nth-child(6n+6) {
         margin-top: -6.9285714285%;
         margin-bottom: -6.9285714285%;
     }
-    li:nth-child(6n+4):last-child, li:nth-child(6n+5):last-child, li:nth-child(6n+6):last-child{
+    & li:nth-child(6n+4):last-child, li:nth-child(6n+5):last-child, li:nth-child(6n+6):last-child{
         margin-bottom:0%;
     }
-    li > a{
+    & li > a{
         width:100%;
         height:100%;
         text-align:center;
@@ -111,15 +110,16 @@ const HexGrid = styled('ul')`
     
     // HEX CONTENT
     
-    li img{
+    & li img{
         left:-100%; right:-100%;
         width: auto; height:100%;
     }
-    a h1, a p{
-        width:90%;
+    & a h1, & a p{
+        width:100%;
         padding:0 5%;
+        margin: auto !important;
     }
-    li h1{
+    & li h1{
         bottom:110%;
         font-style:italic;
         font-weight:normal;
@@ -127,7 +127,7 @@ const HexGrid = styled('ul')`
         padding-top:100%;
         padding-bottom:100%;
     }
-    li h1:after{
+    & li h1:after{
         content:'';
         display:block;
         position:absolute;
@@ -137,7 +137,7 @@ const HexGrid = styled('ul')`
         z-index:1;
         border-bottom:2px solid #fff;
     }
-    li p{
+    & li p{
         padding-top:50%;
         top:110%;
         padding-bottom:50%;
@@ -145,11 +145,11 @@ const HexGrid = styled('ul')`
     
     
     // HOVER EFFECT
-    li a:hover h1 {
+    & li a:hover h1 {
         bottom:50%;
         padding-bottom:10%;
     }
-    li a:hover p{
+    & li a:hover p{
         top:50%;
         padding-top:10%;
     }
