@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
-import Task from './Task.js';
+import BS from 'react-bootstrap'
+
+import Tile from './Task.js';
 import NavBar from './NavBar.jsx'
+import Footer from './Footer.jsx'
 
 import styled from 'react-emotion'
 
@@ -10,61 +13,65 @@ export default class App extends Component {
 
     getTasks() {
         return [
-            { _id: 1, text: 'Task 1' },
-            { _id: 2, text: 'Task 2' },
-            { _id: 3, text: 'Task 3' },
-            { _id: 4, text: 'Task 4' },
-            { _id: 5, text: 'Task 5' },
-            { _id: 6, text: 'Task 6' },
-            { _id: 7, text: 'Task 7' },
-            { _id: 8, text: 'Task 8' },
-            { _id: 9, text: 'Task 9' },
-            { _id: 10, text: 'Task 10' },
-            { _id: 11, text: 'Task 11' },
-            { _id: 12, text: 'Task 12' },
-            { _id: 13, text: 'Task 13' },
+            { _id: 1, text: 'Tile 1' },
+            { _id: 2, text: 'Tile 2' },
+            { _id: 3, text: 'Tile 3' },
+            { _id: 4, text: 'Tile 4' },
+            { _id: 5, text: 'Tile 5' },
+            { _id: 6, text: 'Tile 6' },
+            { _id: 7, text: 'Tile 7' },
+            { _id: 8, text: 'Tile 8' },
+            { _id: 9, text: 'Tile 9' },
+            { _id: 10, text: 'Tile 10' },
+            { _id: 11, text: 'Tile 11' },
+            { _id: 12, text: 'Tile 12' },
+            { _id: 13, text: 'Tile 13' },
         ];
     }
 
     renderTasks() {
         let hex = {};
         return this.getTasks().map((task) => (
-            <Task key={task._id} task={task} hex={hex}/>
+            <Tile key={task._id} task={task} hex={hex}/>
         ));
-    }
-
-    renderNav() {
-        return (
-            <NavBar/>
-        )
     }
 
     render() {
         return (
-            <div id="wrapper-main" className="wrapper">
-                <div id="navbar-main" className="nav">
-                    {this.renderNav()}
-                </div>
+            <BS.Grid>
+                <NavBar/>
+
+                <Offset/>
 
                 <HexGrid>
-                    <li></li>
-                    <Task task={{text: "pizza!"}} hex={{}}/>
-                    <Task task={{text: "pizza!"}} hex={{}}/>
-                    <Task task={{text: "pizza!"}} hex={{}}/>
-                    <Task task={{text: "pizza!"}} hex={{}}/>
-                    <Task task={{text: "pizza!"}} hex={{}}/>
-                    <li></li>
-                    <Task task={{text: "pizza!"}} hex={{}}/>
-                    <Task task={{text: "pizza!"}} hex={{}}/>
+                    <li/>
+                    <Tile task={{text: "pizza!"}} hex={{}}/>
+                    <Tile task={{text: "pizza!"}} hex={{}}/>
+                    <Tile task={{text: "pizza!"}} hex={{}}/>
+                    <Tile task={{text: "pizza!"}} hex={{}}/>
+                    <Tile task={{text: "pizza!"}} hex={{}}/>
+                    <li/>
+                    <Tile task={{text: "pizza!"}} hex={{}}/>
+                    <Tile task={{text: "pizza!"}} hex={{}}/>
                 </HexGrid>
 
                 <HexGrid>
                     {this.renderTasks()}
                 </HexGrid>
-            </div>
+
+                <Footer/>
+            </BS.Grid>
         );
     }
 }
+
+const Offset = styled('div')`
+    width: 100%;
+    min-height: 50px;
+    height: 70px;
+    clear;
+`;
+
 
 const HexGrid = styled('ul')`
     display: flex;
@@ -73,7 +80,7 @@ const HexGrid = styled('ul')`
     font-size: 15px;
     list-style-type: none;
     overflow:hidden;
-    width:90%;
+    width:60%;
     margin:0 auto;
     
     &:after {

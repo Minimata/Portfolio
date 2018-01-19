@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import styled, {css} from 'react-emotion'
 
-export default class Task extends Component {
+export default class Tile extends Component {
     render() {
         return (
             <Hexagon>

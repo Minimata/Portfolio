@@ -3,44 +3,41 @@
  */
 
 import React, {Component} from 'react';
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
+import BS from 'react-bootstrap'
+import styled, {css} from 'react-emotion'
 
 export default class NavBar extends Component {
     render() {
         return (
-            <Navbar inverse collapseOnSelect fixedTop>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <a href="#">React-Bootstrap</a>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                </Navbar.Header>
-                <Navbar.Collapse>
-                    <Nav>
-                        <NavItem eventKey={1} href="#">
-                            Link
-                        </NavItem>
-                        <NavItem eventKey={2} href="#">
-                            Link
-                        </NavItem>
-                        <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                            <MenuItem eventKey={3.1}>Action</MenuItem>
-                            <MenuItem eventKey={3.2}>Another action</MenuItem>
-                            <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                        </NavDropdown>
-                    </Nav>
-                    <Nav pullRight>
-                        <NavItem eventKey={1} href="#">
-                            Link Right
-                        </NavItem>
-                        <NavItem eventKey={2} href="#">
-                            Link Right
-                        </NavItem>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+            <BS.Grid>
+                <BS.Navbar inverse fixedTop>
+                    <BS.Navbar.Header className={CenterX}>
+                        <BS.Navbar.Brand>
+                            <a href="#">Alexandre Serex</a>
+                        </BS.Navbar.Brand>
+                    </BS.Navbar.Header>
+                    <BS.Col xsHidden>
+                        <BS.Nav pullRight>
+                            <BS.NavItem eventKey={1} href="#">
+                                Link
+                            </BS.NavItem>
+                            <BS.NavItem eventKey={2} href="#">
+                                Link
+                            </BS.NavItem>
+                            <BS.NavItem eventKey={3} href="#">
+                                Link
+                            </BS.NavItem>
+                        </BS.Nav>
+                    </BS.Col>
+                </BS.Navbar>
+            </BS.Grid>
         );
     }
 }
+
+const CenterX = css`
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+`;
