@@ -60,7 +60,7 @@ const HexImg = styled('img')`
 `;
 
 const HexText = css`
-    font-family: 'Raleway', sans-serif;
+    font-family: "Poppins", sans-serif;
 
     -webkit-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
     -ms-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;

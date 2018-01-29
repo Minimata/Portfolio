@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
 import BS from 'react-bootstrap'
+import styled, {css} from 'react-emotion'
 
-import Tile from './Task.js';
+import Tile from './Tile.js';
 import NavBar from './NavBar.jsx'
 import Footer from './Footer.jsx'
+import Separator from './Separator.jsx'
 
-import styled from 'react-emotion'
 
 // App component - represents the whole app
 export default class App extends Component {
@@ -20,16 +21,10 @@ export default class App extends Component {
             { _id: 5, text: 'Tile 5' },
             { _id: 6, text: 'Tile 6' },
             { _id: 7, text: 'Tile 7' },
-            { _id: 8, text: 'Tile 8' },
-            { _id: 9, text: 'Tile 9' },
-            { _id: 10, text: 'Tile 10' },
-            { _id: 11, text: 'Tile 11' },
-            { _id: 12, text: 'Tile 12' },
-            { _id: 13, text: 'Tile 13' },
         ];
     }
 
-    renderTasks() {
+    renderWorks() {
         let hex = {};
         return this.getTasks().map((task) => (
             <Tile key={task._id} task={task} hex={hex}/>
@@ -38,26 +33,43 @@ export default class App extends Component {
 
     render() {
         return (
-            <BS.Grid>
+            <BS.Grid className={NoMarginNoPadding}>
                 <NavBar/>
-
                 <Offset/>
 
-                <HexGrid>
-                    <li/>
-                    <Tile task={{text: "pizza!"}} hex={{}}/>
-                    <Tile task={{text: "pizza!"}} hex={{}}/>
-                    <Tile task={{text: "pizza!"}} hex={{}}/>
-                    <Tile task={{text: "pizza!"}} hex={{}}/>
-                    <Tile task={{text: "pizza!"}} hex={{}}/>
-                    <li/>
-                    <Tile task={{text: "pizza!"}} hex={{}}/>
-                    <Tile task={{text: "pizza!"}} hex={{}}/>
-                </HexGrid>
+                <Separator title={"Works"}>
+                    A description of some projects I worked (or keep working) on.
+                </Separator>
 
                 <HexGrid>
-                    {this.renderTasks()}
+                    {this.renderWorks()}
                 </HexGrid>
+
+                <Separator title={"Life"}>
+                    Some moments of my life and education. It's the blog part of this website.
+                </Separator>
+
+                <HexGrid>
+                    {this.renderWorks()}
+                </HexGrid>
+
+                <Separator title={"Messages"}>
+                    What do you think about me ? You can write it down and it will be instantly visible for everyone.
+                </Separator>
+
+                <HexGrid>
+                    {this.renderWorks()}
+                </HexGrid>
+
+                <Separator title={"Contact"}>
+                    Here's how you can contact me of course.
+                </Separator>
+
+                <HexGrid>
+                    {this.renderWorks()}
+                </HexGrid>
+
+                <Offset/>
 
                 <Footer/>
             </BS.Grid>
@@ -65,10 +77,16 @@ export default class App extends Component {
     }
 }
 
+const NoMarginNoPadding = css`
+    width: 100%;
+    margin: 0;
+    padding: 0;
+`;
+
 const Offset = styled('div')`
     width: 100%;
     min-height: 50px;
-    height: 70px;
+    height: 90px;
     clear;
 `;
 
@@ -76,12 +94,22 @@ const Offset = styled('div')`
 const HexGrid = styled('ul')`
     display: flex;
     flex-wrap: wrap;
-    font-family: 'Raleway', sans-serif;
     font-size: 15px;
     list-style-type: none;
+    font-family: 'Raleway', sans-serif;
     overflow:hidden;
-    width:60%;
-    margin:0 auto;
+    width:75%;
+    margin: 40px auto 40px auto;
+    
+    @media(max-width: 1200px) {
+        width: 90%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    @media(max-width: 768px) {
+        ${NoMarginNoPadding}
+    }
     
     &:after {
         content:"";

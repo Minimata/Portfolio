@@ -4,30 +4,24 @@
 
 import React, {Component} from 'react';
 import BS from 'react-bootstrap'
-import styled, {css} from 'react-emotion'
+import {css} from 'react-emotion'
+
+import LinksToSections from './LinksToSections.jsx'
+import Brand from './Brand.jsx'
 
 export default class NavBar extends Component {
     render() {
         return (
             <BS.Grid>
-                <BS.Navbar inverse fixedTop>
-                    <BS.Navbar.Header className={CenterX}>
-                        <BS.Navbar.Brand>
-                            <a href="#">Alexandre Serex</a>
-                        </BS.Navbar.Brand>
-                    </BS.Navbar.Header>
+                <BS.Navbar className={makeRoom} inverse fixedTop>
+                    <BS.Col smHidden mdHidden lgHidden>
+                        <Brand className={`${pullRight} ${BrandStyle}`} />
+                    </BS.Col>
                     <BS.Col xsHidden>
-                        <BS.Nav pullRight>
-                            <BS.NavItem eventKey={1} href="#">
-                                Link
-                            </BS.NavItem>
-                            <BS.NavItem eventKey={2} href="#">
-                                Link
-                            </BS.NavItem>
-                            <BS.NavItem eventKey={3} href="#">
-                                Link
-                            </BS.NavItem>
-                        </BS.Nav>
+                        <Brand className={BrandStyle} />
+                    </BS.Col>
+                    <BS.Col xsHidden>
+                        <LinksToSections pullRight />
                     </BS.Col>
                 </BS.Navbar>
             </BS.Grid>
@@ -35,9 +29,25 @@ export default class NavBar extends Component {
     }
 }
 
-const CenterX = css`
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+const BrandStyle = css`
+    & > * {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.75em;
+        font-weight: 300;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+`;
+
+const pullRight = css`
+    & > * {
+        float: right !important;
+    }
 }
+`;
+
+const makeRoom = css`
+    & > * {
+        padding: 20px 0;
+    }
 `;

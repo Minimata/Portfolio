@@ -6,23 +6,15 @@ import React, {Component} from 'react';
 import BS from 'react-bootstrap'
 import {css} from 'react-emotion'
 
+import LinksToSections from './LinksToSections.jsx'
+
 export default class Footer extends Component {
     render() {
         return (
             <BS.Grid>
                 <BS.Col smHidden mdHidden lgHidden>
                     <BS.Navbar inverse fixedTop className={fixedBot}>
-                        <BS.Nav className={SpaceEvenly}>
-                            <BS.NavItem eventKey={1} href="#">
-                                Link
-                            </BS.NavItem>
-                            <BS.NavItem eventKey={2} href="#">
-                                Link
-                            </BS.NavItem>
-                            <BS.NavItem eventKey={3} href="#">
-                                Link
-                            </BS.NavItem>
-                        </BS.Nav>
+                        <LinksToSections className={SpaceEvenly} />
                     </BS.Navbar>
                 </BS.Col>
             </BS.Grid>
