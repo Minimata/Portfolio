@@ -1,25 +1,104 @@
 import React, {Component} from 'react'
 import styled, {css} from 'react-emotion'
+import BS from 'react-bootstrap'
 
 export default class Tile extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+
+        this.state = {
+            show: false
+        };
+    }
+
+    handleClose() {
+        this.setState({ show: false });
+    }
+
+    handleShow() {
+        this.setState({ show: true });
+    }
+
+
+
     render() {
         return (
             <Hexagon>
                 <HexLink href="#"
-                         color={this.props.hex.color ? this.props.hex.color : 'whitesmoke'}
-                         backColor={this.props.hex.backColor ? this.props.hex.backColor : 'rgba(0, 8, 16, 0.8)'}>
+                         color={this.props.color ? this.props.hex.color : 'whitesmoke'}
+                         backColor={this.props.backColor ? this.props.hex.backColor : 'rgba(0, 8, 16, 0.8)'}
+                         onClick={this.handleShow}>
                     <HexImg
-                        src="https://68.media.tumblr.com/d0db33edebbfc6d56ec41600a1c9afeb/tumblr_n4lx886yCF1r4xjo2o1_500.gif"
-                        alt=""/>
-                    <HexTitle>PIZZA CAT</HexTitle>
+                        src={this.props.image}
+                        alt={this.props.title}/>
+                    <HexTitle>{this.props.title}</HexTitle>
                     <HexSubtitle>
-                        is in love with {this.props.task.text}
+                        {this.props.subtitle}
                     </HexSubtitle>
                 </HexLink>
+                <BS.Modal show={this.state.show} onHide={this.handleClose} bsSize="large" className={ModalStyle}>
+                    <BS.Modal.Header className={ModalHeaderStyle} closeButton>
+                        <BS.Modal.Title>{this.props.title}</BS.Modal.Title>
+                    </BS.Modal.Header>
+                    <BS.Modal.Body className={ModalBodyStyle}>
+
+                        {this.props.children}
+
+                    </BS.Modal.Body>
+                    <BS.Modal.Footer>
+                        <BS.Button onClick={this.handleClose}>Close</BS.Button>
+                    </BS.Modal.Footer>
+                </BS.Modal>
             </Hexagon>
         );
     }
 }
+
+
+
+const ModalStyle = css`
+    font-family: "Poppins", sans-serif !important;
+    
+    & > div {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    & .modal-content {
+        -webkit-border-radius: 0px !important;
+        -moz-border-radius: 0px !important;
+        border-radius: 0px !important;
+    }
+`;
+
+const ModalHeaderStyle = css`
+    padding: 30px 40px;
+`;
+
+const ModalBodyStyle = css`
+    padding: 0 0 20px 0;
+    
+    & img {
+        width: 100%;
+        object.fit: cover;
+        margin: 40px auto;
+    }
+    & p {
+        margin: 0 auto;
+        padding: 10px 40px;
+    }
+    & h4 {
+        margin: 0 auto;
+        padding: 40px 40px 10px 40px;
+    }
+`;
+
+
+
 
 const Hexagon = styled('li')`
     position:relative;
@@ -60,7 +139,10 @@ const HexImg = styled('img')`
 `;
 
 const HexText = css`
-    font-family: "Poppins", sans-serif;
+    
+    @media(max-width: 500px) {
+        font-size: 0.8em !important;
+    }
 
     -webkit-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
     -ms-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;

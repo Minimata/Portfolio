@@ -24,13 +24,6 @@ export default class App extends Component {
         ];
     }
 
-    renderWorks() {
-        let hex = {};
-        return this.getTasks().map((task) => (
-            <Tile key={task._id} task={task} hex={hex}/>
-        ));
-    }
-
     render() {
         return (
             <BS.Grid className={NoMarginNoPadding}>
@@ -42,7 +35,32 @@ export default class App extends Component {
                 </Separator>
 
                 <HexGrid>
-                    {this.renderWorks()}
+                    <Tile key={1} title={"Python Heightmaps"} subtitle={"A fractal approach"} image={"images/island3.png"}>
+                        <h4>Goal</h4>
+                        <p>
+                            The goal of this small project was to beta test an idea I had for terrain generation : mixing noise functions and fractals to get some mountains.
+                            This idea came to my mind looking at my fellow Alps in Switzerland with Google Maps.
+                        </p>
+                        <img src={"/images/alps.png"} alt={"A Bird's eye view of the Alps."}/>
+                        <p>
+                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
+                        </p>
+                        <p>
+                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
+                        </p>
+                        <p>
+                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
+                        </p>
+                        <p>
+                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
+                        </p>
+                        <p>
+                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
+                        </p>
+                        <p>
+                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
+                        </p>
+                    </Tile>
                 </HexGrid>
 
                 <Separator title={"Life"}>
@@ -50,7 +68,7 @@ export default class App extends Component {
                 </Separator>
 
                 <HexGrid>
-                    {this.renderWorks()}
+
                 </HexGrid>
 
                 <Separator title={"Messages"}>
@@ -58,7 +76,7 @@ export default class App extends Component {
                 </Separator>
 
                 <HexGrid>
-                    {this.renderWorks()}
+
                 </HexGrid>
 
                 <Separator title={"Contact"}>
@@ -66,7 +84,7 @@ export default class App extends Component {
                 </Separator>
 
                 <HexGrid>
-                    {this.renderWorks()}
+
                 </HexGrid>
 
                 <Offset/>
@@ -96,7 +114,7 @@ const HexGrid = styled('ul')`
     flex-wrap: wrap;
     font-size: 15px;
     list-style-type: none;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Poppins", sans-serif;
     overflow:hidden;
     width:75%;
     margin: 40px auto 40px auto;
@@ -149,7 +167,7 @@ const HexGrid = styled('ul')`
         left:-100%; right:-100%;
         width: auto; height:100%;
     }
-    & a h1, & a p{
+    & a > h1, & a > p{
         width:100%;
         padding:0 5%;
         margin: auto !important;
