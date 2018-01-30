@@ -5,33 +5,49 @@
 import React, {Component} from 'react';
 import BS from 'react-bootstrap'
 import {css} from 'react-emotion'
+import {Link} from 'react-scroll'
 
 export default class LinksToSections extends Component {
     render() {
         return (
-                <BS.Nav {...this.props}>
-                    <BS.NavItem eventKey={1} href="#">
-                        <BS.Col className={LinkWrapper} xsHidden><BS.Glyphicon glyph="stats"><span className={Link}> Works</span></BS.Glyphicon></BS.Col>
-                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="stats" /></BS.Col>
-                    </BS.NavItem>
-                    <BS.NavItem eventKey={2} href="#">
-                        <BS.Col className={LinkWrapper} xsHidden><BS.Glyphicon glyph="user"><span className={Link}> Life</span></BS.Glyphicon></BS.Col>
-                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="user" /></BS.Col>
-                    </BS.NavItem>
-                    <BS.NavItem eventKey={3} href="#">
-                        <BS.Col className={LinkWrapper} xsHidden><BS.Glyphicon glyph="pencil"><span className={Link}> Messages</span></BS.Glyphicon></BS.Col>
-                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="pencil" /></BS.Col>
-                    </BS.NavItem>
-                    <BS.NavItem eventKey={4} href="#">
-                        <BS.Col className={LinkWrapper} xsHidden><BS.Glyphicon glyph="envelope"><span className={Link}> Contact</span></BS.Glyphicon></BS.Col>
-                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="envelope" /></BS.Col>
-                    </BS.NavItem>
-                </BS.Nav>
+            <ul className={"nav navbar-nav navbar-right"}>
+                <li role={"presentation"} className={pointer}>
+                    <Link to="Works" spy={true} smooth={true} offset={-90} duration={275}>
+                        <BS.Col className={LinkWrapper} xsHidden><BS.Glyphicon glyph="stats"><span
+                            className={LinkStyle}> Works</span></BS.Glyphicon></BS.Col>
+                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="stats"/></BS.Col>
+                    </Link>
+                </li>
+                <li role={"presentation"} className={pointer}>
+                    <Link to="Life" spy={true} smooth={true} offset={-90} duration={275}>
+                        <BS.Col className={LinkWrapper} xsHidden><BS.Glyphicon glyph="user"><span className={LinkStyle}> Life</span></BS.Glyphicon></BS.Col>
+                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="user"/></BS.Col>
+                    </Link>
+                </li>
+                <li role={"presentation"} className={pointer}>
+                    <Link to="Messages" spy={true} smooth={true} offset={-90} duration={275}>
+                        <BS.Col className={LinkWrapper} xsHidden><BS.Glyphicon glyph="pencil"><span
+                            className={LinkStyle}> Messages</span></BS.Glyphicon></BS.Col>
+                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="pencil"/></BS.Col>
+                    </Link>
+                </li>
+                <li role={"presentation"} className={pointer}>
+                    <Link to="Contact" spy={true} smooth={true} offset={-90} duration={275}>
+                        <BS.Col className={LinkWrapper} xsHidden><BS.Glyphicon glyph="envelope"><span
+                            className={LinkStyle}> Contact</span></BS.Glyphicon></BS.Col>
+                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="envelope"/></BS.Col>
+                    </Link>
+                </li>
+            </ul>
         );
     }
 }
 
-const Link = css`
+const pointer = css`
+    cursor: pointer;
+`;
+
+const LinkStyle = css`
     font-family: "Poppins", sans-serif;
 `;
 

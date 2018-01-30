@@ -4,8 +4,6 @@ import BS from 'react-bootstrap'
 import styled, {css} from 'react-emotion'
 
 import Tile from './Tile.js';
-import NavBar from './NavBar.jsx'
-import Footer from './Footer.jsx'
 import Separator from './Separator.jsx'
 
 
@@ -27,69 +25,83 @@ export default class App extends Component {
     render() {
         return (
             <BS.Grid className={NoMarginNoPadding}>
-                <NavBar/>
                 <Offset/>
 
-                <Separator title={"Works"}>
+                <Separator title={"Works"} id={"Works"}>
                     A description of some projects I worked (or keep working) on.
                 </Separator>
 
                 <HexGrid>
-                    <Tile key={1} title={"Python Heightmaps"} subtitle={"A fractal approach"} image={"images/island3.png"}>
-                        <h4>Goal</h4>
-                        <p>
-                            The goal of this small project was to beta test an idea I had for terrain generation : mixing noise functions and fractals to get some mountains.
-                            This idea came to my mind looking at my fellow Alps in Switzerland with Google Maps.
-                        </p>
-                        <img src={"/images/alps.png"} alt={"A Bird's eye view of the Alps."}/>
-                        <p>
-                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
-                        </p>
-                        <p>
-                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
-                        </p>
-                        <p>
-                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
-                        </p>
-                        <p>
-                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
-                        </p>
-                        <p>
-                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
-                        </p>
-                        <p>
-                            Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
-                        </p>
-                    </Tile>
+                    <Tile key={1} title={"Python Heightmaps"} subtitle={"A fractal approach"} image={"images/island3.png"} link={'/'}/>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
                 </HexGrid>
 
-                <Separator title={"Life"}>
+                <Separator title={"Life"} id={"Life"}>
                     Some moments of my life and education. It's the blog part of this website.
                 </Separator>
 
                 <HexGrid>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
 
                 </HexGrid>
 
-                <Separator title={"Messages"}>
+                <Separator title={"Messages"} id={"Messages"}>
                     What do you think about me ? You can write it down and it will be instantly visible for everyone.
                 </Separator>
 
                 <HexGrid>
-
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
                 </HexGrid>
 
-                <Separator title={"Contact"}>
+                <Separator title={"Contact"} id={"Contact"}>
                     Here's how you can contact me of course.
                 </Separator>
 
                 <HexGrid>
-
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
                 </HexGrid>
 
                 <Offset/>
 
-                <Footer/>
             </BS.Grid>
         );
     }

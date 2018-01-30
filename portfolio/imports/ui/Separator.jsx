@@ -4,19 +4,22 @@
 
 import React, {Component} from 'react';
 import styled from 'react-emotion'
+import {Element} from 'react-scroll'
 
 export default class Separator extends Component {
     render() {
         return (
-            <FullWidthBackground>
-                <Title>
-                    {this.props.title}
-                </Title>
+            <Element name={this.props.id}>
+                <FullWidthBackground>
+                    <Title>
+                        {this.props.title}
+                    </Title>
 
-                <Content>
-                    {this.props.children}
-                </Content>
-            </FullWidthBackground>
+                    <Content>
+                        {this.props.children}
+                    </Content>
+                </FullWidthBackground>
+            </Element>
         );
     }
 }
