@@ -8,7 +8,7 @@ export default class Tile extends Component {
             <Hexagon>
                 <HexLink color={this.props.color ? this.props.hex.color : 'whitesmoke'}
                          backColor={this.props.backColor ? this.props.hex.backColor : 'rgba(0, 8, 16, 0.8)'}
-                         onClick={FlowRouter.go(this.props.link)}>
+                         href={this.props.link}>
                     <HexImg
                         src={this.props.image}
                         alt={this.props.title}/>
@@ -60,18 +60,6 @@ export default class Tile extends Component {
  </BS.Modal.Footer>
  </BS.Modal>
 
- The children :
-
- <h4>Goal</h4>
- <p>
- The goal of this small project was to beta test an idea I had for terrain generation : mixing noise functions and fractals to get some mountains.
- This idea came to my mind looking at my fellow Alps in Switzerland with Google Maps.
- </p>
- <img src={"/images/alps.png"} alt={"A Bird's eye view of the Alps."}/>
- <p>
- Look at this an tell me there's not a repeating pattern in there, getting smaller and smaller.
- </p>
- </Tile>
  */
 
 const ModalStyle = css`

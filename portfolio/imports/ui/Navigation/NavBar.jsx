@@ -9,20 +9,32 @@ import {css} from 'react-emotion'
 import LinksToSections from './LinksToSections.jsx'
 import Brand from './Brand.jsx'
 
+function reducedNavBar() {
+    return <BS.Col>
+        <Brand className={`${pullRight} ${BrandStyle}`}/>
+    </BS.Col>
+}
+
+function standardNavBar() {
+    return <div>
+        <BS.Col smHidden mdHidden lgHidden>
+            <Brand className={`${pullRight} ${BrandStyle}`}/>
+        </BS.Col>
+        <BS.Col xsHidden>
+            <Brand className={BrandStyle}/>
+        </BS.Col>
+        <BS.Col xsHidden>
+            <LinksToSections pullRight/>
+        </BS.Col>
+    </div>
+}
+
 export default class NavBar extends Component {
     render() {
         return (
             <BS.Grid>
                 <BS.Navbar className={makeRoom} inverse fixedTop>
-                    <BS.Col smHidden mdHidden lgHidden>
-                        <Brand className={`${pullRight} ${BrandStyle}`} />
-                    </BS.Col>
-                    <BS.Col xsHidden>
-                        <Brand className={BrandStyle} />
-                    </BS.Col>
-                    <BS.Col xsHidden>
-                        <LinksToSections pullRight />
-                    </BS.Col>
+                    {this.props.reduced ? reducedNavBar() : standardNavBar()}
                 </BS.Navbar>
             </BS.Grid>
         );
