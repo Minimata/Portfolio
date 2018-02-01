@@ -10,23 +10,27 @@ import LinksToSections from './LinksToSections.jsx'
 import Brand from './Brand.jsx'
 
 function reducedNavBar() {
-    return <BS.Col>
-        <Brand className={`${pullRight} ${BrandStyle}`}/>
-    </BS.Col>
+    return (
+        <BS.Col>
+            <Brand className={`${pullRight} ${BrandStyle}`}/>
+        </BS.Col>
+    );
 }
 
 function standardNavBar() {
-    return <div>
-        <BS.Col smHidden mdHidden lgHidden>
-            <Brand className={`${pullRight} ${BrandStyle}`}/>
-        </BS.Col>
-        <BS.Col xsHidden>
-            <Brand className={BrandStyle}/>
-        </BS.Col>
-        <BS.Col xsHidden>
-            <LinksToSections pullRight/>
-        </BS.Col>
-    </div>
+    return (
+        <div>
+            <BS.Col smHidden mdHidden lgHidden>
+                <Brand className={`${pullRight} ${BrandStyle}`}/>
+            </BS.Col>
+            <BS.Col xsHidden>
+                <Brand className={BrandStyle}/>
+            </BS.Col>
+            <BS.Col xsHidden>
+                <LinksToSections pullRight/>
+            </BS.Col>
+        </div>
+    );
 }
 
 export default class NavBar extends Component {

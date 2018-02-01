@@ -14,7 +14,7 @@ export default class Footer extends Component {
             <BS.Grid>
                 <BS.Col smHidden mdHidden lgHidden>
                     <BS.Navbar inverse fixedTop className={fixedBot}>
-                        <LinksToSections className={SpaceEvenly} />
+                        <LinksToSections />
                     </BS.Navbar>
                 </BS.Col>
             </BS.Grid>
@@ -28,10 +28,4 @@ const fixedBot = css`
     width: 100%;
     top: 100% !important;
     bottom: 0 !important;
-`;
-
-const SpaceEvenly = css`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
 `;

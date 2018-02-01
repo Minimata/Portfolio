@@ -10,7 +10,7 @@ import {Link} from 'react-scroll'
 export default class LinksToSections extends Component {
     render() {
         return (
-            <ul className={"nav navbar-nav navbar-right"}>
+            <ul className={`nav navbar-nav navbar-right ${SpaceEvenly}`}>
                 <li role={"presentation"} className={pointer}>
                     <Link to="Works" spy={true} smooth={true} offset={-90} duration={275}>
                         <BS.Col className={LinkWrapper} xsHidden><BS.Glyphicon glyph="stats"><span
@@ -56,4 +56,10 @@ const LinkWrapper = css`
 	@media (min-width: 1200px) {
         padding: 0 40px;
 	}
+`;
+
+const SpaceEvenly = css`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 `;
