@@ -15,13 +15,12 @@ const mount2 = withOptions({
 FlowRouter.route('/', {
     name: 'home',
     action() {
-        mount2(App)
+        mount(App)
     }
 });
 
 FlowRouter.route('/article/:id', {
     action: function(params, queryParams) {
-        //console.log("Yeah! We are on the post:", params.id);
-        mount2(Article)
+        mount(Article, {articleId: params.id})
     }
 });

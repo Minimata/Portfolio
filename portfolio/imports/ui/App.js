@@ -5,6 +5,7 @@ import {css} from 'react-emotion'
 
 import Home from "./Pages/Home.jsx"
 
+
 // App component - represents the whole app
 export default class App extends Component {
     render() {

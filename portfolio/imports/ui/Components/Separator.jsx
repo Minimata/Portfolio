@@ -9,7 +9,7 @@ import {Element} from 'react-scroll'
 export default class Separator extends Component {
     render() {
         return (
-            <Element name={this.props.id}>
+            <Element name={this.props.title}>
                 <FullWidthBackground>
                     <Title>
                         {this.props.title}

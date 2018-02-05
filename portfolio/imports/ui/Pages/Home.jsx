@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import styled from 'react-emotion'
+import { withTracker } from 'meteor/react-meteor-data';
 
 import Tile from '../Components/Tile.js';
 import Separator from '../Components/Separator.jsx'
@@ -11,45 +12,55 @@ import NavBar from '../Navigation/NavBar.jsx'
 import Footer from '../Navigation/Footer.jsx'
 import Offset from "../Components/Offset.jsx"
 
+import { Articles } from '../../api/Articles.js';
 
-export default class Home extends Component {
+
+class Home extends Component {
+
+    renderArticles(articles) {
+        return articles.map((tile) => (
+            <Tile key={tile._id} title={tile.title} subtitle={tile.subtitle}
+                  image={tile.image_url} link={'/article/' + tile._id} />
+        ));
+    }
+
     render() {
         return (
             <div>
                 <NavBar/>
                 <Offset/>
 
-                <Separator title={"Works"} id={"Works"}>
+                <Separator title={"Works"}>
                     A description of some projects I worked (or keep working) on.
                 </Separator>
 
                 <HexGrid>
-                    <Tile key={1} title={"Python Heightmaps"} subtitle={"A fractal approach"}
-                          image={"images/island3.png"} link={'/article/0'}/>
+                    {this.renderArticles(this.props.worksArticles)}
+                    {/** <Tile key={1} title={"Python Heightmaps"} subtitle={"A fractal approach"} image={"images/island3.png"} link={'/article/0'}/> **/}
                 </HexGrid>
 
-                <Separator title={"Life"} id={"Life"}>
+                <Separator title={"Life"}>
                     Some moments of my life and education. It's the blog part of this website.
                 </Separator>
 
                 <HexGrid>
-
+                    {this.renderArticles(this.props.lifeArticles)}
                 </HexGrid>
 
-                <Separator title={"Messages"} id={"Messages"}>
+                <Separator title={"Messages"}>
                     What do you think about me ? You can write it down and it will be instantly visible for everyone.
                 </Separator>
 
                 <HexGrid>
-
+                    {this.renderArticles(this.props.messagesArticles)}
                 </HexGrid>
 
-                <Separator title={"Contact"} id={"Contact"}>
+                <Separator title={"Contact"}>
                     Here's how you can contact me of course.
                 </Separator>
 
                 <HexGrid>
-
+                    {this.renderArticles(this.props.contactArticles)}
                 </HexGrid>
 
                 <Offset/>
@@ -59,6 +70,16 @@ export default class Home extends Component {
         );
     }
 }
+
+
+export default withTracker(() => {
+    return {
+        worksArticles: Articles.find({category: "works"}).fetch(),
+        lifeArticles: Articles.find({category: "life"}).fetch(),
+        messagesArticles: Articles.find({category: "messages"}).fetch(),
+        contactArticles: Articles.find({category: "contact"}).fetch(),
+    };
+})(Home);
 
 
 const HexGrid = styled('ul')`
