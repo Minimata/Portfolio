@@ -2,6 +2,8 @@ import React from 'react';
 
 import App from '../imports/ui/App.js';
 import Article from '../imports/ui/Pages/Article.jsx'
+import NewEntry from '../imports/ui/Pages/NewEntry.jsx'
+import NotFound from '../imports/ui/Pages/NotFound.jsx'
 
 import {mount, withOptions} from 'react-mounter';
 
@@ -9,7 +11,6 @@ const mount2 = withOptions({
     rootId: 'render-target',
     rootProps: {'className': ''}
 }, mount);
-
 
 
 FlowRouter.route('/', {
@@ -20,7 +21,20 @@ FlowRouter.route('/', {
 });
 
 FlowRouter.route('/article/:id', {
-    action: function(params, queryParams) {
+    action: function (params, queryParams) {
         mount(Article, {articleId: params.id})
     }
 });
+
+FlowRouter.route('/new/:category', {
+    action: function (params, queryParams) {
+        mount(NewEntry, {category: params.category});
+    }
+});
+
+FlowRouter.notFound = {
+    name: 'notFound',
+    action: function () {
+        mount(NotFound)
+    }
+};

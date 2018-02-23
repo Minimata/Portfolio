@@ -17,9 +17,9 @@ import { Articles } from '../../api/Articles.js';
 
 class Home extends Component {
 
-    renderArticles(articles) {
+    renderArticles(articles, category) {
         return articles.map((tile) => (
-            <Tile key={tile._id} title={tile.title} subtitle={tile.subtitle}
+            <Tile key={tile._id} title={tile.title} subtitle={tile.subtitle} category={category}
                   image={tile.image_url} link={'/article/' + tile._id} />
         ));
     }
@@ -35,8 +35,8 @@ class Home extends Component {
                 </Separator>
 
                 <HexGrid>
-                    {this.renderArticles(this.props.worksArticles)}
-                    {/** <Tile key={1} title={"Python Heightmaps"} subtitle={"A fractal approach"} image={"images/island3.png"} link={'/article/0'}/> **/}
+                    {this.renderArticles(this.props.worksArticles, categories[0])}
+                    <Tile key={1} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"} link={'/new/works'}/>
                 </HexGrid>
 
                 <Separator title={"Life"}>
@@ -44,7 +44,8 @@ class Home extends Component {
                 </Separator>
 
                 <HexGrid>
-                    {this.renderArticles(this.props.lifeArticles)}
+                    {this.renderArticles(this.props.lifeArticles, categories[1])}
+                    <Tile key={2} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"} link={'/new/life'}/>
                 </HexGrid>
 
                 <Separator title={"Messages"}>
@@ -52,7 +53,8 @@ class Home extends Component {
                 </Separator>
 
                 <HexGrid>
-                    {this.renderArticles(this.props.messagesArticles)}
+                    {this.renderArticles(this.props.messagesArticles, categories[2])}
+                    <Tile key={3} title={"New message"} subtitle={"Message me something !"} image={"images/plus_icon.png"} link={'/new/messages'}/>
                 </HexGrid>
 
                 <Separator title={"Contact"}>
@@ -60,7 +62,8 @@ class Home extends Component {
                 </Separator>
 
                 <HexGrid>
-                    {this.renderArticles(this.props.contactArticles)}
+                    {this.renderArticles(this.props.contactArticles, categories[3])}
+                    <Tile key={4} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"} link={'/new/contact'}/>
                 </HexGrid>
 
                 <Offset/>
@@ -71,13 +74,14 @@ class Home extends Component {
     }
 }
 
+export const categories = ["works", "life", "messages", "contact"];
 
 export default withTracker(() => {
     return {
-        worksArticles: Articles.find({category: "works"}).fetch(),
-        lifeArticles: Articles.find({category: "life"}).fetch(),
-        messagesArticles: Articles.find({category: "messages"}).fetch(),
-        contactArticles: Articles.find({category: "contact"}).fetch(),
+        worksArticles: Articles.find({category: categories[0]}).fetch(),
+        lifeArticles: Articles.find({category: categories[1]}).fetch(),
+        messagesArticles: Articles.find({category: categories[2]}).fetch(),
+        contactArticles: Articles.find({category: categories[3]}).fetch(),
     };
 })(Home);
 

@@ -2,70 +2,84 @@
  * Created by Civilists on 30.01.2018
  */
 
-import { Mongo } from 'meteor/mongo';
+import {Mongo} from 'meteor/mongo';
 import styled, {css} from 'react-emotion'
 import React, {Component} from 'react';
+import BS from 'react-bootstrap'
 
 import NavBar from '../Navigation/NavBar.jsx'
 import Offset from "../Components/Offset.jsx"
 
-import { Articles } from '../../api/Articles.js';
-
-const ContentTypes = {
-    "title": renderTitle,
-    "paragraph": renderParagraph,
-    "image": renderImage,
-    "legend": renderLegend,
-};
-
-function renderTitle(content) {
-    return(<SectionTitle key={new Mongo.ObjectID()}>{content}</SectionTitle>);
-}
-function renderParagraph(content) {
-    return(<Paragraph key={new Mongo.ObjectID()}>{content}</Paragraph>);
-}
-function renderImage(content) {
-    return(<img key={new Mongo.ObjectID()} src={content.url} alt={content.alt}/>);
-}
-function renderLegend(content) {
-    return(<Legend key={new Mongo.ObjectID()}>{content}</Legend>);
-}
+import {Articles} from '../../api/Articles.js';
+import ArticlePortion from '../Components/ArticlePortion.jsx'
 
 export default class Article extends Component {
 
     constructor(props) {
         super(props);
-        this.article = Articles.findOne({_id: new Mongo.ObjectID(this.props.articleId)});
+        try {
+            this.article = Articles.findOne({_id: new Mongo.ObjectID(this.props.articleId)});
+        }
+        catch (error) {
+            console.log(error);
+            FlowRouter.go('notFound');
+        }
+
+        if (!this.article) {
+            FlowRouter.go('notFound');
+        }
     }
 
     renderContent(content) {
-        return content.map((part) => (
-            ContentTypes[part.type](part.content)
-        ));
+        return content.map((part) => {
+            let id = new Mongo.ObjectID();
+            return <ArticlePortion key={id} id={id} type={part.type} content={part.content}/>
+        });
+    }
+
+    deleteArticle() {
+
     }
 
     render() {
-        return (
-            <div>
-                <NavBar reduced/>
-                <Offset/>
+        if (this.article) {
+            return (
+                <div>
+                    <NavBar reduced/>
+                    <Offset/>
 
-                <Wrapper>
-                    <Header>
-                        <Title>{this.article.title}</Title>
-                        <Subtitle>{this.article.subtitle}</Subtitle>
-                    </Header>
+                    <Wrapper>
+                        <Header>
+                            <BS.ButtonToolbar className={SpaceEvenly}>
+                                <BS.Button bsStyle="info" onClick={() => FlowRouter.go('/new/' + this.category)}>Edit</BS.Button>
+                                <BS.Button bsStyle="danger" onClick={this.deleteArticle()}>Delete</BS.Button>
+                            </BS.ButtonToolbar>
+                            <ArticlePortion id={new Mongo.ObjectID()} type={'title'} content={this.article.title} />
+                            <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} content={this.article.subtitle} />
+                        </Header>
 
-                    <Content>
-                        {this.renderContent(this.article.content)}
-                    </Content>
-                </Wrapper>
+                        <Content>
+                            {this.renderContent(this.article.content)}
+                        </Content>
+                    </Wrapper>
 
-                <Offset/>
-            </div>
-        );
+                    <Offset/>
+                </div>
+            );
+        }
+        else return (<div/>)
     }
 }
+
+
+const SpaceEvenly = css`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    & > * {
+        flex-grow: 1;
+    }
+`;
 
 
 const Wrapper = styled('div')`
@@ -75,53 +89,25 @@ const Wrapper = styled('div')`
     & * {
         margin: 0 auto;
     }
-`;
-
-const mainPadding = css`
-    padding-right: 20%;
-    padding-left: 20%;
+    
+    & > div > * {
+        padding-right: 20%;
+        padding-left: 20%;
+        
+        @media(max-width: 768px) {
+            padding-right: 12%;
+            padding-left: 12%;
+        }
+    }
 `;
 
 const Header = styled('div')`
     padding: 30px auto;
-    ${mainPadding}
-`;
-
-const Title = styled('h1')`
-    padding-top: 30px;
-    padding-bottom: 10px
-
-    font-size: 42px;
-    font-weight: 600;
-    line-height; 1.04;
-    letter-spacing: -.015em;
-    
-    @media(max-width: 768px) {
-        font-size: 34px;
-    }
-`;
-
-const Subtitle = styled('h2')`
-    padding-top: 10px;
-    padding-bottom: 30px
-    
-    font-size: 28px;
-    font-weight: 400;
-    line-height: 1.22;
-    letter-spacing: -.012em;
-    
-    @media(max-width: 768px) {
-        font-size: 24px;
-    }
 `;
 
 
 const Content = styled('div')`
     padding: 30px auto;
-    
-    & > * {
-        ${mainPadding}
-    }
     
     & img {
         padding: 30px 8% 0 8%;
@@ -132,23 +118,4 @@ const Content = styled('div')`
             padding: 30px 0 0 0;
         }
     }
-`;
-
-const SectionTitle = styled('h4')`
-    padding-top: 40px;
-    padding-bottom: 10px;
-`;
-
-const Paragraph = styled('p')`
-    margin: 0;
-    padding-top: 30px;
-    padding-bottom: 30px;
-`;
-
-const Legend = styled('p')`
-    padding-top: 20px;
-    padding-bottom: 50px;
-    margin: 0 10%;
-    font-style: italic;
-    color: rgb(100, 100, 100);
 `;
