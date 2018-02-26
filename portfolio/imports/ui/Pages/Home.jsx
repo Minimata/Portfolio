@@ -4,7 +4,8 @@
 
 import React, {Component} from 'react';
 import styled from 'react-emotion'
-import { withTracker } from 'meteor/react-meteor-data';
+import {withTracker} from 'meteor/react-meteor-data';
+import {buildRequest} from '../../../lib/router';
 
 import Tile from '../Components/Tile.js';
 import Separator from '../Components/Separator.jsx'
@@ -12,15 +13,14 @@ import NavBar from '../Navigation/NavBar.jsx'
 import Footer from '../Navigation/Footer.jsx'
 import Offset from "../Components/Offset.jsx"
 
-import { Articles } from '../../api/Articles.js';
-
+import {Articles} from '../../api/Articles.js';
 
 class Home extends Component {
 
     renderArticles(articles, category) {
         return articles.map((tile) => (
             <Tile key={tile._id} title={tile.title} subtitle={tile.subtitle} category={category}
-                  image={tile.image_url} link={'/article/' + tile._id} />
+                  image={tile.image_url} link={buildRequest('article', tile._id, {category: category})} articleId={tile._id}/>
         ));
     }
 
@@ -36,7 +36,8 @@ class Home extends Component {
 
                 <HexGrid>
                     {this.renderArticles(this.props.worksArticles, categories[0])}
-                    <Tile key={1} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"} link={'/new/works'}/>
+                    <Tile key={1} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
+                          link={buildRequest('new', new Mongo.ObjectID(), {category: categories[0]})}/>
                 </HexGrid>
 
                 <Separator title={"Life"}>
@@ -45,7 +46,8 @@ class Home extends Component {
 
                 <HexGrid>
                     {this.renderArticles(this.props.lifeArticles, categories[1])}
-                    <Tile key={2} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"} link={'/new/life'}/>
+                    <Tile key={2} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"} link={'new'}
+                          articleId={new Mongo.ObjectID()} category={categories[1]}/>
                 </HexGrid>
 
                 <Separator title={"Messages"}>
@@ -54,7 +56,9 @@ class Home extends Component {
 
                 <HexGrid>
                     {this.renderArticles(this.props.messagesArticles, categories[2])}
-                    <Tile key={3} title={"New message"} subtitle={"Message me something !"} image={"images/plus_icon.png"} link={'/new/messages'}/>
+                    <Tile key={3} title={"New message"} subtitle={"Message me something !"}
+                          image={"images/plus_icon.png"} link={'new'} articleId={new Mongo.ObjectID()}
+                          category={categories[2]}/>
                 </HexGrid>
 
                 <Separator title={"Contact"}>
@@ -63,7 +67,8 @@ class Home extends Component {
 
                 <HexGrid>
                     {this.renderArticles(this.props.contactArticles, categories[3])}
-                    <Tile key={4} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"} link={'/new/contact'}/>
+                    <Tile key={4} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"} link={'new'}
+                          articleId={new Mongo.ObjectID()} category={categories[3]}/>
                 </HexGrid>
 
                 <Offset/>

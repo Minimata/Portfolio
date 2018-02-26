@@ -8,7 +8,8 @@ export default class Tile extends Component {
             <Hexagon>
                 <HexLink color={this.props.color ? this.props.hex.color : 'whitesmoke'}
                          backColor={this.props.backColor ? this.props.hex.backColor : 'rgba(0, 8, 16, 0.8)'}
-                         href={this.props.link}>
+                         href={''}
+                         onClick={() => (FlowRouter.go(this.props.link))}>
                     <HexImg
                         src={this.props.image}
                         alt={this.props.title}/>

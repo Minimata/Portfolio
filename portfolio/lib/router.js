@@ -7,6 +7,16 @@ import NotFound from '../imports/ui/Pages/NotFound.jsx'
 
 import {mount, withOptions} from 'react-mounter';
 
+
+export function buildRequest(name, param, queryParams) {
+    let query = '/' + name + '/' + param + '?';
+    for(const [name, value] of Object.entries(queryParams)) {
+        query += name + '=' + value + '&';
+    }
+    return query.slice(0, -1);  //remove last '&'
+}
+
+
 const mount2 = withOptions({
     rootId: 'render-target',
     rootProps: {'className': ''}
@@ -20,21 +30,24 @@ FlowRouter.route('/', {
     }
 });
 
-FlowRouter.route('/article/:id', {
+FlowRouter.route('/article/:articleId', {
+    name: 'article',
     action: function (params, queryParams) {
-        mount(Article, {articleId: params.id})
+        mount(Article, {articleId: params.articleId, ...queryParams})
     }
 });
 
-FlowRouter.route('/new/:category', {
+FlowRouter.route('/new/:articleId', {
+    name: 'new',
     action: function (params, queryParams) {
-        mount(NewEntry, {category: params.category});
+        mount(NewEntry, {articleId: params.articleId, ...queryParams});
     }
 });
 
 FlowRouter.notFound = {
     name: 'notFound',
-    action: function () {
+    action: function (params, queryParams) {
+        console.log(params, queryParams);
         mount(NotFound)
     }
 };

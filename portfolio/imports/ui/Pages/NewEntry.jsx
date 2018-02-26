@@ -52,10 +52,9 @@ export default class NewEntry extends Component {
 
     AddPortion(type) {
         let newState = this.state.content;
-        console.log(newState);
         let data = {
             type: type,
-            content: <Textarea className={'form-control'}/>
+            content: <Textarea autoFocus className={'form-control'}/>
         };
         if (type === 'image') {
             data.content = {
@@ -64,16 +63,21 @@ export default class NewEntry extends Component {
             }
         }
         newState[new Mongo.ObjectID()] = data;
-        console.log(newState);
         this.setState(newState);
     }
 
     renderContent(content) {
+        let portions = [];
         if (Object.keys(content).length > 0) {
-            return Object.assign(Object.entries(content).map(([id, data]) => (
+            portions = Object.assign(Object.entries(content).map(([id, data]) => (
                 <ArticlePortion key={id} id={id} type={data.type} content={data.content}/>
             )));
         }
+        return portions;
+    }
+
+    save() {
+        console.log("saving...")
     }
 
 
@@ -114,14 +118,15 @@ export default class NewEntry extends Component {
                         <Content>
                             {this.renderContent(this.state.content)}
                             <ArticlePortion key={new Mongo.ObjectID()} type={'sectionTitle'} content={'Edit options'}/>
-                            <BS.ButtonToolbar className={SpaceEvenly}>
-                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("title")}>Section
-                                    title</BS.Button>
-                                <BS.Button bsStyle="info"
-                                           onClick={() => this.AddPortion("paragraph")}>Paragraph</BS.Button>
+
+                            <BS.ButtonToolbar className={ButtonStyle}>
+                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("title")}>Section</BS.Button>
+                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("paragraph")}>Paragraph</BS.Button>
                                 <BS.Button bsStyle="info" onClick={() => this.AddPortion("image")}>Image</BS.Button>
                                 <BS.Button bsStyle="info" onClick={() => this.AddPortion("caption")}>Caption</BS.Button>
-                                <BS.Button bsStyle="success">Save</BS.Button>
+                            </BS.ButtonToolbar>
+                            <BS.ButtonToolbar className={ButtonStyle}>
+                                <BS.Button bsStyle="success" onClick={this.save}>Save</BS.Button>
                             </BS.ButtonToolbar>;
                         </Content>
                     </form>
@@ -162,12 +167,20 @@ const Subtitle = styled('h2')`
     }
 `;
 
-const SpaceEvenly = css`
+const ButtonStyle = css`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin: 0 !important;
     & > * {
         flex-grow: 1;
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+    @media(max-width: 768px) {
+        width: 100vw;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 `;
 
@@ -175,7 +188,7 @@ const Wrapper = styled('div')`
     padding: 40px 0;
     font-family: "Poppins" !important;
     font-size: 16px;
-    & * {
+    & input {
         margin: 0 auto;
         border-style: none;
         border-radius: 0 !important;

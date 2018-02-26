@@ -12,6 +12,7 @@ import Offset from "../Components/Offset.jsx"
 
 import {Articles} from '../../api/Articles.js';
 import ArticlePortion from '../Components/ArticlePortion.jsx'
+import {buildRequest} from '../../../lib/router';
 
 export default class Article extends Component {
 
@@ -26,12 +27,12 @@ export default class Article extends Component {
         }
 
         if (!this.article) {
+            console.log("Problem with article number");
             FlowRouter.go('notFound');
         }
     }
 
     renderContent(content) {
-        console.log(content);
         return content.map((part) => {
             let id = new Mongo.ObjectID();
             return <ArticlePortion key={id} id={id} type={part.type} content={part.content}/>
@@ -52,7 +53,7 @@ export default class Article extends Component {
                     <Wrapper>
                         <Header>
                             <BS.ButtonToolbar className={SpaceEvenly}>
-                                <BS.Button bsStyle="info" onClick={() => FlowRouter.go('/new/' + this.category)}>Edit</BS.Button>
+                                <BS.Button bsStyle="info" onClick={() => FlowRouter.go(buildRequest('new', this.props.articleId, {category: this.props.category}))}>Edit</BS.Button>
                                 <BS.Button bsStyle="danger" onClick={this.deleteArticle()}>Delete</BS.Button>
                             </BS.ButtonToolbar>
                             <ArticlePortion id={new Mongo.ObjectID()} type={'title'} content={this.article.title} />
