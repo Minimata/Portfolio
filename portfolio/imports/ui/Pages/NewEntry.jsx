@@ -12,6 +12,9 @@ import {categories} from "./Home.jsx";
 import NavBar from '../Navigation/NavBar.jsx'
 import Offset from "../Components/Offset.jsx"
 
+import {Articles} from '../../api/Articles.js';
+import ArticlePortion from '../Components/ArticlePortion.jsx'
+
 
 export default class NewEntry extends Component {
 
@@ -48,22 +51,29 @@ export default class NewEntry extends Component {
     }
 
     AddPortion(type) {
-        let newState = {...this.state.content, id: part};
+        let newState = this.state.content;
+        console.log(newState);
+        let data = {
+            type: type,
+            content: <Textarea className={'form-control'}/>
+        };
+        if (type === 'image') {
+            data.content = {
+                url: "/images/alps.png",
+                alt: "Top view of the alps"
+            }
+        }
+        newState[new Mongo.ObjectID()] = data;
+        console.log(newState);
         this.setState(newState);
-        /** this.setState(prevState => ({
-            content: {...prevState.part, part}
-        })); */
-    }
-
-    StoreValue(id, value) {
-        this.state.content[id] = value;
     }
 
     renderContent(content) {
-        return Object.assign(...Object.entries(content).map(([k, v]) => ({[k]: v * v})));
-        return content.map((part) => (
-            ContentTypes[part.type](part)
-        ));
+        if (Object.keys(content).length > 0) {
+            return Object.assign(Object.entries(content).map(([id, data]) => (
+                <ArticlePortion key={id} id={id} type={data.type} content={data.content}/>
+            )));
+        }
     }
 
 
@@ -103,10 +113,12 @@ export default class NewEntry extends Component {
 
                         <Content>
                             {this.renderContent(this.state.content)}
-                            <SectionTitle>Edit options</SectionTitle>
+                            <ArticlePortion key={new Mongo.ObjectID()} type={'sectionTitle'} content={'Edit options'}/>
                             <BS.ButtonToolbar className={SpaceEvenly}>
-                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("title")}>Section title</BS.Button>
-                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("paragraph")}>Paragraph</BS.Button>
+                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("title")}>Section
+                                    title</BS.Button>
+                                <BS.Button bsStyle="info"
+                                           onClick={() => this.AddPortion("paragraph")}>Paragraph</BS.Button>
                                 <BS.Button bsStyle="info" onClick={() => this.AddPortion("image")}>Image</BS.Button>
                                 <BS.Button bsStyle="info" onClick={() => this.AddPortion("caption")}>Caption</BS.Button>
                                 <BS.Button bsStyle="success">Save</BS.Button>
@@ -120,6 +132,35 @@ export default class NewEntry extends Component {
         );
     }
 }
+
+
+const Title = styled('h1')`
+    padding-top: 30px;
+    padding-bottom: 10px
+
+    font-size: 42px;
+    font-weight: 600;
+    line-height; 1.04;
+    letter-spacing: -.015em;
+    
+    @media(max-width: 768px) {
+        font-size: 34px;
+    }
+`;
+
+const Subtitle = styled('h2')`
+    padding-top: 10px;
+    padding-bottom: 30px
+    
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.22;
+    letter-spacing: -.012em;
+    
+    @media(max-width: 768px) {
+        font-size: 24px;
+    }
+`;
 
 const SpaceEvenly = css`
     display: flex;

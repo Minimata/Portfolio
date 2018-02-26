@@ -31,6 +31,7 @@ export default class Article extends Component {
     }
 
     renderContent(content) {
+        console.log(content);
         return content.map((part) => {
             let id = new Mongo.ObjectID();
             return <ArticlePortion key={id} id={id} type={part.type} content={part.content}/>
