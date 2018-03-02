@@ -33,21 +33,24 @@ FlowRouter.route('/', {
 FlowRouter.route('/article/:articleId', {
     name: 'article',
     action: function (params, queryParams) {
-        mount(Article, {articleId: params.articleId, ...queryParams})
+        const param = {...params, ...queryParams};
+        const article = () => (<Article params={param}/>);
+        mount(article)
     }
 });
 
 FlowRouter.route('/new/:articleId', {
     name: 'new',
     action: function (params, queryParams) {
-        mount(NewEntry, {articleId: params.articleId, ...queryParams});
+        const param = {...params, ...queryParams};
+        const newEntry = () => (<NewEntry params={param}/>);
+        mount(newEntry);
     }
 });
 
 FlowRouter.notFound = {
     name: 'notFound',
     action: function (params, queryParams) {
-        console.log(params, queryParams);
         mount(NotFound)
     }
 };

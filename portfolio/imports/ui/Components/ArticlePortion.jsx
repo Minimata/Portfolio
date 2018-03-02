@@ -19,7 +19,6 @@ export default class ArticlePortion extends Component {
             "paragraph": (content) => {return (<Paragraph>{content}</Paragraph>)},
             "image": (content) => {return (<img src={content.url} alt={content.alt}/>)},
             "caption": (content) => {return (<Caption>{content}</Caption>)},
-            "legend": (content) => {return (<Caption>{content}</Caption>)},  //backwards compatibility until next DB drop
         };
     }
 

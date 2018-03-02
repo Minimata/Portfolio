@@ -19,7 +19,8 @@ export default class Article extends Component {
     constructor(props) {
         super(props);
         try {
-            this.article = Articles.findOne({_id: new Mongo.ObjectID(this.props.articleId)});
+            this.article = Articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
+            console.log(this.article);
         }
         catch (error) {
             console.log(error);
@@ -35,12 +36,14 @@ export default class Article extends Component {
     renderContent(content) {
         return content.map((part) => {
             let id = new Mongo.ObjectID();
+            console.log(part);
             return <ArticlePortion key={id} id={id} type={part.type} content={part.content}/>
         });
     }
 
-    deleteArticle() {
-
+    deleteArticle(articleId) {
+        Articles.remove({_id: new Mongo.ObjectID(articleId)});
+        FlowRouter.go('home');
     }
 
     render() {
@@ -53,8 +56,8 @@ export default class Article extends Component {
                     <Wrapper>
                         <Header>
                             <BS.ButtonToolbar className={SpaceEvenly}>
-                                <BS.Button bsStyle="info" onClick={() => FlowRouter.go(buildRequest('new', this.props.articleId, {category: this.props.category}))}>Edit</BS.Button>
-                                <BS.Button bsStyle="danger" onClick={this.deleteArticle()}>Delete</BS.Button>
+                                <BS.Button bsStyle="info" onClick={() => FlowRouter.go(buildRequest('new', this.props.params.articleId, {category: this.props.params.category}))}>Edit</BS.Button>
+                                <BS.Button bsStyle="danger" onClick={() => (this.deleteArticle(this.props.params.articleId))}>Delete</BS.Button>
                             </BS.ButtonToolbar>
                             <ArticlePortion id={new Mongo.ObjectID()} type={'title'} content={this.article.title} />
                             <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} content={this.article.subtitle} />

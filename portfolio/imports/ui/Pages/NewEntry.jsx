@@ -2,6 +2,7 @@
  * Created by Civilists on 05.02.2018
  */
 
+import {Mongo} from 'meteor/mongo';
 import React, {Component} from 'react';
 import styled, {css} from 'react-emotion'
 import BS from 'react-bootstrap'
@@ -14,18 +15,20 @@ import Offset from "../Components/Offset.jsx"
 
 import {Articles} from '../../api/Articles.js';
 import ArticlePortion from '../Components/ArticlePortion.jsx'
+import {buildRequest} from "../../../lib/router";
 
 
 export default class NewEntry extends Component {
 
     constructor(props) {
         super(props);
-        if (!categories.includes(this.props.category)) {
+        if (!categories.includes(this.props.params.category)) {
             FlowRouter.go('notFound');
         }
 
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleSubtitleChange = this.handleSubtitleChange.bind(this);
+        this.handlePortionChange = this.handlePortionChange.bind(this);
 
         this.state = {
             title: '',
@@ -50,36 +53,62 @@ export default class NewEntry extends Component {
         this.setState({subtitle: e.target.value});
     }
 
+    handlePortionChange(e) {
+        let newContent = this.state.content;
+        newContent[e.target.id].content = e.target.value;
+        this.setState({content: newContent});
+    }
+
     AddPortion(type) {
-        let newState = this.state.content;
-        let data = {
-            type: type,
-            content: <Textarea autoFocus className={'form-control'}/>
-        };
+        let id = new Mongo.ObjectID();
+        let newContent = this.state.content;
+        let content = '';
         if (type === 'image') {
-            data.content = {
+            content = {
                 url: "/images/alps.png",
                 alt: "Top view of the alps"
             }
         }
-        newState[new Mongo.ObjectID()] = data;
-        this.setState(newState);
+        newContent[id] = {
+            type: type,
+            content: content
+        };
+        this.setState({content: newContent});
     }
 
     renderContent(content) {
         let portions = [];
         if (Object.keys(content).length > 0) {
             portions = Object.assign(Object.entries(content).map(([id, data]) => (
-                <ArticlePortion key={id} id={id} type={data.type} content={data.content}/>
+                <ArticlePortion key={id} id={id} type={data.type} content={<Textarea id={id} autoFocus className={'form-control'} value={data.content} onChange={this.handlePortionChange} />}/>
             )));
         }
         return portions;
     }
 
-    save() {
-        console.log("saving...")
+    save(articleId, category) {
+        console.log(Object.values(this.state.content));
+        let data = {
+            category: category,
+            image_url: '/images/island2.png',
+            title: this.state.title,
+            subtitle: this.state.subtitle,
+            content: Object.values(this.state.content),
+        };
+        if(Articles.findOne({_id: new Mongo.ObjectID(articleId)})) {
+            Articles.update({_id: new Mongo.ObjectID(articleId)}, {
+                $set: data
+            });
+        }
+        else {
+            Articles.insert({
+                _id: new Mongo.ObjectID(articleId),
+                createdAt: new Date(),
+                ...data
+            });
+        }
+        FlowRouter.go(buildRequest('article', articleId, {category: category}))
     }
-
 
     render() {
         return (
@@ -120,13 +149,13 @@ export default class NewEntry extends Component {
                             <ArticlePortion key={new Mongo.ObjectID()} type={'sectionTitle'} content={'Edit options'}/>
 
                             <BS.ButtonToolbar className={ButtonStyle}>
-                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("title")}>Section</BS.Button>
+                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("sectionTitle")}>Section</BS.Button>
                                 <BS.Button bsStyle="info" onClick={() => this.AddPortion("paragraph")}>Paragraph</BS.Button>
                                 <BS.Button bsStyle="info" onClick={() => this.AddPortion("image")}>Image</BS.Button>
                                 <BS.Button bsStyle="info" onClick={() => this.AddPortion("caption")}>Caption</BS.Button>
                             </BS.ButtonToolbar>
                             <BS.ButtonToolbar className={ButtonStyle}>
-                                <BS.Button bsStyle="success" onClick={this.save}>Save</BS.Button>
+                                <BS.Button bsStyle="success" onClick={() => (this.save(this.props.params.articleId, this.props.params.category))}>Save</BS.Button>
                             </BS.ButtonToolbar>;
                         </Content>
                     </form>

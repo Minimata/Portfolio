@@ -37,6 +37,7 @@ class Home extends Component {
                 <HexGrid>
                     {this.renderArticles(this.props.worksArticles, categories[0])}
                     <Tile key={1} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
+                          //Should probably let Mongo create his own ids. There might be a problem of caching the id there
                           link={buildRequest('new', new Mongo.ObjectID(), {category: categories[0]})}/>
                 </HexGrid>
 
