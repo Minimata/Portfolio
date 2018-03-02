@@ -87,7 +87,7 @@ export default class NewEntry extends Component {
     }
 
     save(articleId, category) {
-        console.log(Object.values(this.state.content));
+        //console.log(Object.values(this.state.content));
         let data = {
             category: category,
             image_url: '/images/island2.png',

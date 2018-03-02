@@ -20,7 +20,7 @@ export default class Article extends Component {
         super(props);
         try {
             this.article = Articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
-            console.log(this.article);
+            //console.log(this.article);
         }
         catch (error) {
             console.log(error);
