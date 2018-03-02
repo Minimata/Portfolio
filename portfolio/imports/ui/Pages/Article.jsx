@@ -37,7 +37,7 @@ export default class Article extends Component {
         return content.map((part) => {
             let id = new Mongo.ObjectID();
             console.log(part);
-            return <ArticlePortion key={id} id={id} type={part.type} content={part.content}/>
+            return <ArticlePortion key={id} id={id} type={part.type} data={part.content}/>
         });
     }
 
@@ -113,7 +113,6 @@ const Header = styled('div')`
 
 const Content = styled('div')`
     padding: 30px auto;
-    
     & img {
         padding: 30px 8% 0 8%;
         object.fit: cover;

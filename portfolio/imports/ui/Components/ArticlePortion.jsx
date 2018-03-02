@@ -4,26 +4,53 @@
 
 import React, {Component} from 'react';
 import styled from 'react-emotion'
+import Textarea from "react-textarea-autosize";
 
+export const ContentTypes = {
+    "title": (data) => {return (<Title>{data}</Title>)},
+    "subtitle": (data) => {return (<Subtitle>{data}</Subtitle>)},
+    "sectionTitle": (data) => {return (<SectionTitle>{data}</SectionTitle>)},
+    "paragraph": (data) => {return (<Paragraph>{data}</Paragraph>)},
+    "image": (data) => {return (<img src={data.url} alt={data.alt}/>)},
+    "caption": (data) => {return (<Caption>{data}</Caption>)},
+};
 
+export const EditableContent = {
+    "title": titleEditable,
+    "subtitle": subtitleEditable,
+    "sectionTitle": sectionTitleEditable,
+    "paragraph": paragraphEditable,
+    "image": imageEditable,
+    "caption": captionEditable
+};
 
+function titleEditable(data) {
+    return <Title><Textarea autoFocus className={'form-control'} value={data.content} onChange={data.onChange} /></Title>;
+}
+function subtitleEditable(data) {
+    return <Subtitle><Textarea autoFocus className={'form-control'} value={data.content} onChange={data.onChange} /></Subtitle>;
+}
+function sectionTitleEditable(data) {
+    return <SectionTitle><Textarea autoFocus className={'form-control'} value={data.content} onChange={data.onChange} /></SectionTitle>;
+}
+function paragraphEditable(data) {
+    return <Paragraph><Textarea autoFocus className={'form-control'} value={data.content} onChange={data.onChange} /></Paragraph>;
+}
+function imageEditable(data) {
+    return <img src={data.url} alt={data.alt}/>;
+}
+function captionEditable(data) {
+    return <Caption><Textarea autoFocus className={'form-control'} value={data.content} onChange={data.onChange} /></Caption>;
+}
 
 export default class ArticlePortion extends Component {
-
-    constructor(props){
-        super(props);
-        this.contentTypes = {
-            "title": (content) => {return (<Title>{content}</Title>)},
-            "subtitle": (content) => {return (<Subtitle>{content}</Subtitle>)},
-            "sectionTitle": (content) => {return (<SectionTitle>{content}</SectionTitle>)},
-            "paragraph": (content) => {return (<Paragraph>{content}</Paragraph>)},
-            "image": (content) => {return (<img src={content.url} alt={content.alt}/>)},
-            "caption": (content) => {return (<Caption>{content}</Caption>)},
-        };
-    }
-
-    render() {
-        return this.contentTypes[this.props.type](this.props.content);
+    render() {//onChange doesn't work. Integrate it to the article portion
+        if(this.props.editable) {
+            return EditableContent[this.props.type](this.props.data);
+        }
+        else {
+            return ContentTypes[this.props.type](this.props.data);
+        }
     }
 }
 
@@ -69,9 +96,10 @@ const Paragraph = styled('div')`
 `;
 
 const Caption = styled('div')`
+    text-align: center;
     padding-top: 20px;
     padding-bottom: 50px;
-    margin: 0 10%;
+    margin: auto 10%;
     font-style: italic;
     color: rgb(100, 100, 100);
 `;

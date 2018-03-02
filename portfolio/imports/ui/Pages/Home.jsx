@@ -37,7 +37,6 @@ class Home extends Component {
                 <HexGrid>
                     {this.renderArticles(this.props.worksArticles, categories[0])}
                     <Tile key={1} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
-                          //Should probably let Mongo create his own ids. There might be a problem of caching the id there
                           link={buildRequest('new', new Mongo.ObjectID(), {category: categories[0]})}/>
                 </HexGrid>
 
@@ -47,8 +46,8 @@ class Home extends Component {
 
                 <HexGrid>
                     {this.renderArticles(this.props.lifeArticles, categories[1])}
-                    <Tile key={2} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"} link={'new'}
-                          articleId={new Mongo.ObjectID()} category={categories[1]}/>
+                    <Tile key={1} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
+                          link={buildRequest('new', new Mongo.ObjectID(), {category: categories[1]})}/>
                 </HexGrid>
 
                 <Separator title={"Messages"}>
@@ -57,9 +56,8 @@ class Home extends Component {
 
                 <HexGrid>
                     {this.renderArticles(this.props.messagesArticles, categories[2])}
-                    <Tile key={3} title={"New message"} subtitle={"Message me something !"}
-                          image={"images/plus_icon.png"} link={'new'} articleId={new Mongo.ObjectID()}
-                          category={categories[2]}/>
+                    <Tile key={1} title={"New message"} subtitle={"Message me something !"} image={"images/plus_icon.png"}
+                          link={buildRequest('new', new Mongo.ObjectID(), {category: categories[2]})}/>
                 </HexGrid>
 
                 <Separator title={"Contact"}>
@@ -68,8 +66,8 @@ class Home extends Component {
 
                 <HexGrid>
                     {this.renderArticles(this.props.contactArticles, categories[3])}
-                    <Tile key={4} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"} link={'new'}
-                          articleId={new Mongo.ObjectID()} category={categories[3]}/>
+                    <Tile key={1} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
+                          link={buildRequest('new', new Mongo.ObjectID(), {category: categories[3]})}/>
                 </HexGrid>
 
                 <Offset/>
@@ -135,6 +133,7 @@ const HexGrid = styled('ul')`
         margin-top: -6.9285714285%;
         margin-bottom: -6.9285714285%;
     }
+    
     li:nth-child(6n+4):last-child {
         margin-bottom: 0;
     }

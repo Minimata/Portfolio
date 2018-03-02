@@ -6,7 +6,6 @@ import {Mongo} from 'meteor/mongo';
 import React, {Component} from 'react';
 import styled, {css} from 'react-emotion'
 import BS from 'react-bootstrap'
-import Textarea from "react-textarea-autosize";
 
 import {categories} from "./Home.jsx";
 
@@ -80,7 +79,7 @@ export default class NewEntry extends Component {
         let portions = [];
         if (Object.keys(content).length > 0) {
             portions = Object.assign(Object.entries(content).map(([id, data]) => (
-                <ArticlePortion key={id} id={id} type={data.type} content={<Textarea id={id} autoFocus className={'form-control'} value={data.content} onChange={this.handlePortionChange} />}/>
+                <ArticlePortion editable key={id} id={id} type={data.type} data={data.content} onChange={this.handlePortionChange}/>  //handlePortionChange doesn't work. Integrate it to the article portion
             )));
         }
         return portions;
