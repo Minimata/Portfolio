@@ -27,13 +27,15 @@ export default class NewEntry extends Component {
 
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleSubtitleChange = this.handleSubtitleChange.bind(this);
-        this.handlePortionChange = this.handlePortionChange.bind(this);
+        this.renderContent = this.renderContent.bind(this);
 
         this.state = {
             title: '',
             subtitle: '',
-            content: {}
+            data: {}
         };
+
+        this.portionRefs = {};
     }
 
     getValidationState(value, factor = 1) {
@@ -52,15 +54,9 @@ export default class NewEntry extends Component {
         this.setState({subtitle: e.target.value});
     }
 
-    handlePortionChange(e) {
-        let newContent = this.state.content;
-        newContent[e.target.id].content = e.target.value;
-        this.setState({content: newContent});
-    }
-
-    AddPortion(type) {
+    addPortion(type) {
         let id = new Mongo.ObjectID();
-        let newContent = this.state.content;
+        let newData = this.state.data;
         let content = '';
         if (type === 'image') {
             content = {
@@ -68,31 +64,31 @@ export default class NewEntry extends Component {
                 alt: "Top view of the alps"
             }
         }
-        newContent[id] = {
+        newData[id] = {
             type: type,
-            content: content
+            content: <ArticlePortion ref={instance => {this.portionRefs[id] = instance}} editable key={id} id={id} type={type} data={content} />
         };
-        this.setState({content: newContent});
+        this.setState({data: newData});
     }
 
-    renderContent(content) {
+    renderContent() {
         let portions = [];
-        if (Object.keys(content).length > 0) {
-            portions = Object.assign(Object.entries(content).map(([id, data]) => (
-                <ArticlePortion editable key={id} id={id} type={data.type} data={data.content} onChange={this.handlePortionChange}/>  //handlePortionChange doesn't work. Integrate it to the article portion
-            )));
+        if (Object.keys(this.state.data).length > 0) {
+            portions = Object.assign(Object.entries(this.state.data).map(([id, content]) => (content.content)));
         }
         return portions;
     }
 
     save(articleId, category) {
-        //console.log(Object.values(this.state.content));
+        //console.log(this.state.data, this.portionRefs);
+        let content = Object.values(this.portionRefs).map(portion => (portion.getData()));
+        //console.log(content);
         let data = {
             category: category,
             image_url: '/images/island2.png',
             title: this.state.title,
             subtitle: this.state.subtitle,
-            content: Object.values(this.state.content),
+            data: content,
         };
         if(Articles.findOne({_id: new Mongo.ObjectID(articleId)})) {
             Articles.update({_id: new Mongo.ObjectID(articleId)}, {
@@ -144,14 +140,14 @@ export default class NewEntry extends Component {
                         </Header>
 
                         <Content>
-                            {this.renderContent(this.state.content)}
+                            {this.renderContent()}
                             <ArticlePortion key={new Mongo.ObjectID()} type={'sectionTitle'} content={'Edit options'}/>
 
                             <BS.ButtonToolbar className={ButtonStyle}>
-                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("sectionTitle")}>Section</BS.Button>
-                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("paragraph")}>Paragraph</BS.Button>
-                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("image")}>Image</BS.Button>
-                                <BS.Button bsStyle="info" onClick={() => this.AddPortion("caption")}>Caption</BS.Button>
+                                <BS.Button bsStyle="info" onClick={() => this.addPortion("sectionTitle")}>Section</BS.Button>
+                                <BS.Button bsStyle="info" onClick={() => this.addPortion("paragraph")}>Paragraph</BS.Button>
+                                <BS.Button bsStyle="info" onClick={() => this.addPortion("image")}>Image</BS.Button>
+                                <BS.Button bsStyle="info" onClick={() => this.addPortion("caption")}>Caption</BS.Button>
                             </BS.ButtonToolbar>
                             <BS.ButtonToolbar className={ButtonStyle}>
                                 <BS.Button bsStyle="success" onClick={() => (this.save(this.props.params.articleId, this.props.params.category))}>Save</BS.Button>

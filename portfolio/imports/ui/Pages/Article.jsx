@@ -36,7 +36,7 @@ export default class Article extends Component {
     renderContent(content) {
         return content.map((part) => {
             let id = new Mongo.ObjectID();
-            console.log(part);
+            //console.log(part);
             return <ArticlePortion key={id} id={id} type={part.type} data={part.content}/>
         });
     }
@@ -59,12 +59,12 @@ export default class Article extends Component {
                                 <BS.Button bsStyle="info" onClick={() => FlowRouter.go(buildRequest('new', this.props.params.articleId, {category: this.props.params.category}))}>Edit</BS.Button>
                                 <BS.Button bsStyle="danger" onClick={() => (this.deleteArticle(this.props.params.articleId))}>Delete</BS.Button>
                             </BS.ButtonToolbar>
-                            <ArticlePortion id={new Mongo.ObjectID()} type={'title'} content={this.article.title} />
-                            <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} content={this.article.subtitle} />
+                            <ArticlePortion id={new Mongo.ObjectID()} type={'title'} data={this.article.title} />
+                            <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} data={this.article.subtitle} />
                         </Header>
 
                         <Content>
-                            {this.renderContent(this.article.content)}
+                            {this.renderContent(this.article.data)}
                         </Content>
                     </Wrapper>
 
