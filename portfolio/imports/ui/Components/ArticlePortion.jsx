@@ -6,6 +6,8 @@ import React, {Component} from 'react';
 import styled, {css} from 'react-emotion'
 import Textarea from "react-textarea-autosize";
 
+import {Files} from '../../api/Files.js';
+
 
 export default class ArticlePortion extends Component {
 
@@ -58,8 +60,22 @@ export default class ArticlePortion extends Component {
     }
 
     fileChange(e) {
-        this.state.file = e.target.files[0];
+        // PROBLEM THERE + How to load image data from db ?
+        this.setState({file: e.target.files[0]});
         console.log(this.state.file);
+        if(!this.state.file) return;
+        let reader = new FileReader(); //create a reader according to HTML5 File API
+
+        reader.onload = function(event) {
+            let buffer = new Uint8Array(reader.result); // convert to binary
+            Files.insert({
+                name: this.state.file.name,
+                buffer: buffer
+            });
+            Meteor.call('saveFile', f);
+        };
+
+        reader.readAsArrayBuffer(this.state.file); //read the file as arraybuffer
     }
 
     handleValueChanged(e) {
