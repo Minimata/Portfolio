@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import styled from 'react-emotion'
+import styled, {css} from 'react-emotion'
 import Textarea from "react-textarea-autosize";
 
 
@@ -12,7 +12,8 @@ export default class ArticlePortion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.data
+            value: this.props.data,
+            file: null,
         };
 
         this.handleValueChanged = this.handleValueChanged.bind(this);
@@ -23,6 +24,7 @@ export default class ArticlePortion extends Component {
         this.imageEditable = this.imageEditable.bind(this);
         this.captionEditable = this.captionEditable.bind(this);
         this.getData = this.getData.bind(this);
+        this.fileChange = this.fileChange.bind(this);
 
         this.contentTypes = {
             "title": (data) => {
@@ -55,6 +57,11 @@ export default class ArticlePortion extends Component {
         };
     }
 
+    fileChange(e) {
+        this.state.file = e.target.files[0];
+        console.log(this.state.file);
+    }
+
     handleValueChanged(e) {
         this.setState({value: e.target.value});
     }
@@ -81,6 +88,22 @@ export default class ArticlePortion extends Component {
 
     imageEditable() {
         //this.setState({value: this.props.data});
+        let id = new Mongo.ObjectID();
+        return (
+            <Paragraph>
+                <FileInput htmlFor={id}>Choisir une image</FileInput>
+                <Input type={'file'}
+                       id={id}
+                       accept={'image/*'}
+                       onChange={this.fileChange}
+                />
+                <Textarea autoFocus
+                          className={'form-control'}
+                          placeholder={'Description '}
+                          value={this.state.value.alt}
+                          onChange={this.handleValueChanged}/>
+            </Paragraph>
+        );
         return <img src={this.props.data.url} alt={this.props.data.alt}/>;
     }
 
@@ -94,12 +117,14 @@ export default class ArticlePortion extends Component {
             type: this.props.type,
             content: this.state.value
         };
-        // Temporary, waiting for image custom upload behaviour
-        if(this.props.type === 'image') {
+        if (this.props.type === 'image') {
+            /*
             data.content = {
-                url: this.props.data.url,
-                alt: this.props.data.alt
+                url: this.state.value,
+                alt: this.state.value
             }
+            */
+            data.content = this.props.data;
         }
         return data;
     }
@@ -114,6 +139,18 @@ export default class ArticlePortion extends Component {
     }
 }
 
+const FileInput = styled('label')`
+    cursor: pointer;
+    color: #00b1ca;
+    font-weight: bold;
+    :hover {
+        color: #25a5c4;
+    }
+`;
+
+const Input = styled('input')`
+    display: none !important;
+`;
 
 const Title = styled('h1')`
     padding-top: 30px;
