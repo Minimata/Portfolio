@@ -20,7 +20,11 @@ export default class Article extends Component {
         super(props);
         try {
             this.article = Articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
-            //console.log(this.article);
+            this.isEditable = !!this.props.params.username;
+            if(this.isEditable) {
+                console.log(this.props.params.username, this.article.username)
+                this.isEditable = this.props.params.username === this.article.username || this.props.params.username === 'admin';
+            }
         }
         catch (error) {
             console.log(error);
@@ -55,12 +59,16 @@ export default class Article extends Component {
 
                     <Wrapper>
                         <Header>
-                            <BS.ButtonToolbar className={SpaceEvenly}>
-                                <BS.Button bsStyle="info" onClick={() => FlowRouter.go(buildRequest('new', this.props.params.articleId, {category: this.props.params.category}))}>Edit</BS.Button>
-                                <BS.Button bsStyle="danger" onClick={() => (this.deleteArticle(this.props.params.articleId))}>Delete</BS.Button>
-                            </BS.ButtonToolbar>
+                            {
+                                this.isEditable ?
+                                    <BS.ButtonToolbar className={SpaceEvenly}>
+                                        <BS.Button bsStyle="info" onClick={() => FlowRouter.go(buildRequest('new', this.props.params.articleId, {category: this.props.params.category}))}>Edit</BS.Button>
+                                        <BS.Button bsStyle="danger" onClick={() => (this.deleteArticle(this.props.params.articleId))}>Delete</BS.Button>
+                                    </BS.ButtonToolbar> : ''
+                            }
                             <ArticlePortion id={new Mongo.ObjectID()} type={'title'} data={this.article.title} />
                             <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} data={this.article.subtitle} />
+                            <ArticlePortion id={new Mongo.ObjectID()} type={'owner'} data={this.article.username === 'admin' ? 'Alexandre' : this.article.username} />
                         </Header>
 
                         <Content>

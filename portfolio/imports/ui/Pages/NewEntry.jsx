@@ -6,6 +6,7 @@ import {Mongo} from 'meteor/mongo';
 import React, {Component} from 'react';
 import styled, {css} from 'react-emotion'
 import BS from 'react-bootstrap'
+import { Meteor } from 'meteor/meteor';
 
 import {categories} from "./Home.jsx";
 
@@ -99,6 +100,8 @@ export default class NewEntry extends Component {
             Articles.insert({
                 _id: new Mongo.ObjectID(articleId),
                 createdAt: new Date(),
+                owner: Meteor.userId(),
+                username: Meteor.user().username,
                 ...data
             });
         }

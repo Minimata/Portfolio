@@ -22,3 +22,6 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 universe:react-bootstrap
 kadira:flow-router
 react-meteor-data
+ostrio:files
+accounts-ui
+accounts-password

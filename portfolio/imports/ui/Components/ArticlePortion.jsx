@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import styled, {css} from 'react-emotion'
+import styled from 'react-emotion'
 import Textarea from "react-textarea-autosize";
 
 import {Files} from '../../api/Files.js';
@@ -35,6 +35,9 @@ export default class ArticlePortion extends Component {
             "subtitle": (data) => {
                 return (<Subtitle>{data}</Subtitle>)
             },
+            "owner": (data) => {
+                return (<Owner>Written by {data}</Owner>)
+            },
             "sectionTitle": (data) => {
                 return (<SectionTitle>{data}</SectionTitle>)
             },
@@ -62,20 +65,6 @@ export default class ArticlePortion extends Component {
     fileChange(e) {
         // PROBLEM THERE + How to load image data from db ?
         this.setState({file: e.target.files[0]});
-        console.log(this.state.file);
-        if(!this.state.file) return;
-        let reader = new FileReader(); //create a reader according to HTML5 File API
-
-        reader.onload = function(event) {
-            let buffer = new Uint8Array(reader.result); // convert to binary
-            Files.insert({
-                name: this.state.file.name,
-                buffer: buffer
-            });
-            Meteor.call('saveFile', f);
-        };
-
-        reader.readAsArrayBuffer(this.state.file); //read the file as arraybuffer
     }
 
     handleValueChanged(e) {
@@ -184,7 +173,7 @@ const Title = styled('h1')`
 
 const Subtitle = styled('h2')`
     padding-top: 10px;
-    padding-bottom: 30px
+    padding-bottom: 5px
     
     font-size: 28px;
     font-weight: 400;
@@ -196,6 +185,20 @@ const Subtitle = styled('h2')`
     }
 `;
 
+const Owner = styled('p')`
+    padding-top: 5px;
+    padding-bottom: 10px
+    
+    font-size: 14px;
+    font-weight: 200;
+    font-style: italic;
+    line-height: 1.14;
+    letter-spacing: -.01em;
+    
+    @media(max-width: 768px) {
+        font-size: 24px;
+    }
+`;
 
 const SectionTitle = styled('h4')`
     padding-top: 40px;
