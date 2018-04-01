@@ -12,7 +12,6 @@ import Separator from '../Components/Separator.jsx'
 import NavBar from '../Navigation/NavBar.jsx'
 import Footer from '../Navigation/Footer.jsx'
 import Offset from "../Components/Offset.jsx"
-import AccountsUIWrapper from '../Components/AccountsUIWrapper.jsx';
 
 import {Articles} from '../../api/Articles.js';
 
@@ -34,8 +33,6 @@ class Home extends Component {
             <div>
                 <NavBar/>
                 <Offset/>
-
-                <AccountsUIWrapper/>
 
                 <Separator title={"Works"}>
                     A description of some projects I worked (or keep working) on.
