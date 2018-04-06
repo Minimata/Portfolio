@@ -23,5 +23,6 @@ universe:react-bootstrap
 kadira:flow-router
 react-meteor-data
 ostrio:files
-accounts-ui
 accounts-password
+accounts-ui-unstyled
+accounts-ui

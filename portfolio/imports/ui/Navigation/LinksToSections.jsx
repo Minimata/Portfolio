@@ -70,7 +70,8 @@ export default class LinksToSections extends Component {
                     <a>
                         <BS.Col className={LinkWrapper} xsHidden>
                             <BS.Glyphicon glyph="off">
-                                <span className={LinkStyle} ref="container"> Sign In</span>
+                                <span className={LinkStyle}> Sign In</span>
+                                <span ref="container" />
                             </BS.Glyphicon>
                         </BS.Col>
                         <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="off"/></BS.Col>
