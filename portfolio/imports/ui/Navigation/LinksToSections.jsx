@@ -13,6 +13,15 @@ import ReactDOM from "react-dom";
 
 export default class LinksToSections extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.handleSingUpClick = this.handleSingUpClick.bind(this);
+        this.state = {
+            loginOpen: false
+        }
+    }
+
     componentDidMount() {
         // Use Meteor Blaze to render login buttons
         this.view = Blaze.render(Template.loginButtons,
@@ -21,6 +30,12 @@ export default class LinksToSections extends Component {
     componentWillUnmount() {
         // Clean up Blaze view
         Blaze.remove(this.view);
+    }
+
+    handleSingUpClick(e) {
+        this.refs.container.children[0].children[0].children[0].click();
+        let newState = !this.state.loginOpen;
+        this.setState({loginOpen: newState});
     }
 
     render() {
@@ -67,20 +82,32 @@ export default class LinksToSections extends Component {
                     </Link>
                 </li>
                 <li role={"presentation"} className={pointer}>
-                    <a>
+                    <a onClick={this.handleSingUpClick}>
                         <BS.Col className={LinkWrapper} xsHidden>
                             <BS.Glyphicon glyph="off">
-                                <span className={LinkStyle}> Sign In</span>
-                                <span ref="container" />
+                                <span className={LinkStyle}> Account</span>
                             </BS.Glyphicon>
                         </BS.Col>
                         <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="off"/></BS.Col>
+                        <span className={this.state.loginOpen ? HiddenA : Hidden} ref={"container"} />
                     </a>
                 </li>
             </ul>
         );
     }
 }
+
+const HiddenA = css`
+    position: absolute;
+    a {
+        display: none;
+    }
+`;
+
+const Hidden = css`
+    display: none;
+`;
+
 
 const pointer = css`
     cursor: pointer;
@@ -91,7 +118,7 @@ const LinkStyle = css`
 `;
 
 const LinkWrapper = css`
-    padding: 0 2px;
+    padding: 0 5px;
 	@media (min-width: 1200px) {
         padding: 0 40px;
 	}

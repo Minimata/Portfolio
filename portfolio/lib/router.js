@@ -48,6 +48,7 @@ FlowRouter.route('/new/:articleId', {
     }
 });
 
+
 FlowRouter.notFound = {
     name: 'notFound',
     action: function (params, queryParams) {

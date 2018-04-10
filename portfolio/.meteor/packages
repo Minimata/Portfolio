@@ -26,3 +26,4 @@ ostrio:files
 accounts-password
 accounts-ui-unstyled
 accounts-ui
+std:accounts-ui

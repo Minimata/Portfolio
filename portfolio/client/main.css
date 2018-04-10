@@ -3,3 +3,17 @@
 body {
     background: whitesmoke;
 }
+
+#login-dropdown-list {
+    position: fixed;
+    top: 99px;
+    left: unset;
+    right: 10px !important;
+}
+
+@media (max-width: 767px) {
+    #login-dropdown-list {
+        top: unset;
+        bottom: 49px;
+    }
+}
