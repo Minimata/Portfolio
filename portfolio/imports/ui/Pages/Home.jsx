@@ -12,6 +12,7 @@ import Separator from '../Components/Separator.jsx'
 import NavBar from '../Navigation/NavBar.jsx'
 import Footer from '../Navigation/Footer.jsx'
 import Offset from "../Components/Offset.jsx"
+import FloatingButton from "../Components/FloatingButton.jsx"
 
 import {Articles} from '../../api/Articles.js';
 
@@ -106,6 +107,7 @@ class Home extends Component {
                     }
                 </HexGrid>
 
+                <FloatingButton/>
                 <Offset/>
                 <Footer/>
             </div>
@@ -215,7 +217,7 @@ const HexGrid = styled('ul')`
         bottom:-1px; left:45%;
         width:10%;
         text-align:center;
-        z-index:1;
+        z-index: 1;
         border-bottom:2px solid #fff;
     }
     li p{

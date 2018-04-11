@@ -6,37 +6,10 @@ import React, {Component} from 'react';
 import BS from 'react-bootstrap'
 import {css} from 'react-emotion'
 import {Link} from 'react-scroll'
-import {Template} from "meteor/templating";
-import {Blaze} from "meteor/blaze";
-import ReactDOM from "react-dom";
 
 
 export default class LinksToSections extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.handleSingUpClick = this.handleSingUpClick.bind(this);
-        this.state = {
-            loginOpen: false
-        }
-    }
-
-    componentDidMount() {
-        // Use Meteor Blaze to render login buttons
-        this.view = Blaze.render(Template.loginButtons,
-            ReactDOM.findDOMNode(this.refs.container));
-    }
-    componentWillUnmount() {
-        // Clean up Blaze view
-        Blaze.remove(this.view);
-    }
-
-    handleSingUpClick(e) {
-        this.refs.container.children[0].children[0].children[0].click();
-        let newState = !this.state.loginOpen;
-        this.setState({loginOpen: newState});
-    }
 
     render() {
         return (
@@ -81,32 +54,10 @@ export default class LinksToSections extends Component {
                         <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="envelope"/></BS.Col>
                     </Link>
                 </li>
-                <li role={"presentation"} className={pointer}>
-                    <a onClick={this.handleSingUpClick}>
-                        <BS.Col className={LinkWrapper} xsHidden>
-                            <BS.Glyphicon glyph="off">
-                                <span className={LinkStyle}> Account</span>
-                            </BS.Glyphicon>
-                        </BS.Col>
-                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="off"/></BS.Col>
-                        <span className={this.state.loginOpen ? HiddenA : Hidden} ref={"container"} />
-                    </a>
-                </li>
             </ul>
         );
     }
 }
-
-const HiddenA = css`
-    position: absolute;
-    a {
-        display: none;
-    }
-`;
-
-const Hidden = css`
-    display: none;
-`;
 
 
 const pointer = css`

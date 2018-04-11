@@ -28,11 +28,13 @@ export default class NewEntry extends Component {
 
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleSubtitleChange = this.handleSubtitleChange.bind(this);
+        this.handleImageChange = this.handleImageChange.bind(this);
         this.renderContent = this.renderContent.bind(this);
 
         this.state = {
             title: '',
             subtitle: '',
+            image_url: '/images/message.png',
             data: {}
         };
 
@@ -50,21 +52,17 @@ export default class NewEntry extends Component {
     handleTitleChange(e) {
         this.setState({title: e.target.value});
     }
-
     handleSubtitleChange(e) {
         this.setState({subtitle: e.target.value});
+    }
+    handleImageChange(e) {
+        this.setState({image_url: e.target.value});
     }
 
     addPortion(type) {
         let id = new Mongo.ObjectID();
         let newData = this.state.data;
         let content = '';
-        if (type === 'image') {
-            content = {
-                url: "/images/alps.png",
-                alt: "Top view of the alps"
-            }
-        }
         newData[id] = {
             type: type,
             content: <ArticlePortion ref={instance => {this.portionRefs[id] = instance}} editable key={id} id={id} type={type} data={content} />
@@ -86,9 +84,9 @@ export default class NewEntry extends Component {
         //console.log(content);
         let data = {
             category: category,
-            image_url: '/images/island2.png',
             title: this.state.title,
             subtitle: this.state.subtitle,
+            image_url: this.state.image_url,
             data: content,
         };
         if(Articles.findOne({_id: new Mongo.ObjectID(articleId)})) {
@@ -106,6 +104,21 @@ export default class NewEntry extends Component {
             });
         }
         FlowRouter.go(buildRequest('article', articleId, {category: category}))
+    }
+
+    renderHexagonImageInput() {
+        return (
+            <ImageURL>
+                <BS.FormGroup bsSize="large"
+                              controlId="formBasicText">
+                    <BS.FormControl type="text" placeholder="Image URL"
+                                    value={this.state.image_url}
+                                    onChange={this.handleImageChange}/>
+
+                    <BS.FormControl.Feedback/>
+                </BS.FormGroup>
+            </ImageURL>
+        )
     }
 
     render() {
@@ -128,6 +141,7 @@ export default class NewEntry extends Component {
                                     <BS.FormControl.Feedback/>
                                 </BS.FormGroup>
                             </Title>
+                            {Meteor.user().username === 'admin' ? this.renderHexagonImageInput() : null}
                             <Subtitle>
                                 <BS.FormGroup bsSize="large"
                                               controlId="formBasicText"
@@ -140,6 +154,7 @@ export default class NewEntry extends Component {
                                 </BS.FormGroup>
                             </Subtitle>
 
+
                         </Header>
 
                         <Content>
@@ -149,7 +164,7 @@ export default class NewEntry extends Component {
                             <BS.ButtonToolbar className={ButtonStyle}>
                                 <BS.Button bsStyle="info" onClick={() => this.addPortion("sectionTitle")}>Section</BS.Button>
                                 <BS.Button bsStyle="info" onClick={() => this.addPortion("paragraph")}>Paragraph</BS.Button>
-                                <BS.Button bsStyle="info" onClick={() => this.addPortion("image")}>Image</BS.Button>
+                                {Meteor.user().username === 'admin' ? <BS.Button bsStyle="info" onClick={() => this.addPortion("image")}>Image</BS.Button> : null}
                                 <BS.Button bsStyle="info" onClick={() => this.addPortion("caption")}>Caption</BS.Button>
                             </BS.ButtonToolbar>
                             <BS.ButtonToolbar className={ButtonStyle}>
@@ -166,13 +181,27 @@ export default class NewEntry extends Component {
 }
 
 
+
+const ImageURL = styled('h3')`
+    padding-top: 10px;
+    padding-bottom: 10px
+
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: -.01em;
+    
+    @media(max-width: 768px) {
+        font-size: 18px;
+    }
+`;
+
 const Title = styled('h1')`
     padding-top: 30px;
     padding-bottom: 10px
 
     font-size: 42px;
     font-weight: 600;
-    line-height; 1.04;
+    line-height: 1.04;
     letter-spacing: -.015em;
     
     @media(max-width: 768px) {

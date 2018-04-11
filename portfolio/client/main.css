@@ -9,11 +9,14 @@ body {
     top: 99px;
     left: unset;
     right: 10px !important;
+    background-color: whitesmoke;
+    z-index: 1200 !important;
+    visibility: visible;
 }
 
 @media (max-width: 767px) {
     #login-dropdown-list {
         top: unset;
-        bottom: 49px;
+        bottom: 124px;
     }
 }

@@ -6,19 +6,17 @@ import React, {Component} from 'react';
 import styled from 'react-emotion'
 import Textarea from "react-textarea-autosize";
 
-import {Files} from '../../api/Files.js';
-
-
 export default class ArticlePortion extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             value: this.props.data,
-            file: null,
+            url: '',
         };
 
         this.handleValueChanged = this.handleValueChanged.bind(this);
+        this.handleURLChanged = this.handleURLChanged.bind(this);
         this.titleEditable = this.titleEditable.bind(this);
         this.subtitleEditable = this.subtitleEditable.bind(this);
         this.sectionTitleEditable = this.sectionTitleEditable.bind(this);
@@ -26,7 +24,6 @@ export default class ArticlePortion extends Component {
         this.imageEditable = this.imageEditable.bind(this);
         this.captionEditable = this.captionEditable.bind(this);
         this.getData = this.getData.bind(this);
-        this.fileChange = this.fileChange.bind(this);
 
         this.contentTypes = {
             "title": (data) => {
@@ -62,13 +59,12 @@ export default class ArticlePortion extends Component {
         };
     }
 
-    fileChange(e) {
-        // PROBLEM THERE + How to load image data from db ?
-        this.setState({file: e.target.files[0]});
-    }
-
     handleValueChanged(e) {
         this.setState({value: e.target.value});
+    }
+
+    handleURLChanged(e) {
+        this.setState({url: e.target.value});
     }
 
     titleEditable() {
@@ -93,23 +89,19 @@ export default class ArticlePortion extends Component {
 
     imageEditable() {
         //this.setState({value: this.props.data});
-        let id = new Mongo.ObjectID();
         return (
             <Paragraph>
-                <FileInput htmlFor={id}>Choisir une image</FileInput>
-                <Input type={'file'}
-                       id={id}
-                       accept={'image/*'}
-                       onChange={this.fileChange}
-                />
+                <Textarea className={'form-control'}
+                          placeholder={'Image URL'}
+                          value={this.state.url}
+                          onChange={this.handleURLChanged}/>
                 <Textarea autoFocus
                           className={'form-control'}
-                          placeholder={'Description '}
-                          value={this.state.value.alt}
+                          placeholder={'Description'}
+                          value={this.state.value}
                           onChange={this.handleValueChanged}/>
             </Paragraph>
         );
-        return <img src={this.props.data.url} alt={this.props.data.alt}/>;
     }
 
     captionEditable() {
@@ -123,13 +115,10 @@ export default class ArticlePortion extends Component {
             content: this.state.value
         };
         if (this.props.type === 'image') {
-            /*
             data.content = {
-                url: this.state.value,
+                url: this.state.url,
                 alt: this.state.value
             }
-            */
-            data.content = this.props.data;
         }
         return data;
     }
