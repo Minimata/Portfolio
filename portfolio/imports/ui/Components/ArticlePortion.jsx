@@ -10,6 +10,7 @@ export default class ArticlePortion extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             value: this.props.data,
             url: '',
@@ -57,6 +58,15 @@ export default class ArticlePortion extends Component {
             "image": this.imageEditable,
             "caption": this.captionEditable
         };
+    }
+
+    componentDidMount() {
+        if(this.props.type === 'image') {
+            this.setState({
+                value: this.props.data.alt,
+                url: this.props.data.url
+            })
+        }
     }
 
     handleValueChanged(e) {
@@ -132,19 +142,6 @@ export default class ArticlePortion extends Component {
         }
     }
 }
-
-const FileInput = styled('label')`
-    cursor: pointer;
-    color: #00b1ca;
-    font-weight: bold;
-    :hover {
-        color: #25a5c4;
-    }
-`;
-
-const Input = styled('input')`
-    display: none !important;
-`;
 
 const Title = styled('h1')`
     padding-top: 30px;

@@ -22,8 +22,7 @@ class Home extends Component {
         return articles.map((tile) => (
             <Tile key={tile._id} title={tile.title} subtitle={tile.subtitle} category={category} image={tile.image_url}
                   link={buildRequest('article', tile._id, {
-                      category: category,
-                      username: this.props.currentUser ? this.props.currentUser.username : undefined
+                      category: category
                   })}
                   articleId={tile._id}/>
         ));

@@ -20,10 +20,10 @@ export default class Article extends Component {
         super(props);
         try {
             this.article = Articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
-            this.isEditable = !!this.props.params.username;
+            this.user = Meteor.users.findOne(Meteor.userId());
+            this.isEditable = !!this.user;
             if(this.isEditable) {
-                console.log(this.props.params.username, this.article.username)
-                this.isEditable = this.props.params.username === this.article.username || this.props.params.username === 'admin';
+                this.isEditable = this.user.username === this.article.username || this.user.username === 'admin';
             }
         }
         catch (error) {
@@ -46,7 +46,7 @@ export default class Article extends Component {
     }
 
     deleteArticle(articleId) {
-        Articles.remove({_id: new Mongo.ObjectID(articleId)});
+        Meteor.call('articles.remove', articleId);
         FlowRouter.go('home');
     }
 
@@ -64,7 +64,7 @@ export default class Article extends Component {
                                     <BS.ButtonToolbar className={SpaceEvenly}>
                                         <BS.Button bsStyle="info" onClick={() => FlowRouter.go(buildRequest('new', this.props.params.articleId, {category: this.props.params.category}))}>Edit</BS.Button>
                                         <BS.Button bsStyle="danger" onClick={() => (this.deleteArticle(this.props.params.articleId))}>Delete</BS.Button>
-                                    </BS.ButtonToolbar> : ''
+                                    </BS.ButtonToolbar> : null
                             }
                             <ArticlePortion id={new Mongo.ObjectID()} type={'title'} data={this.article.title} />
                             <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} data={this.article.subtitle} />

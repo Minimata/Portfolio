@@ -6,7 +6,7 @@ import {Mongo} from 'meteor/mongo';
 import React, {Component} from 'react';
 import styled, {css} from 'react-emotion'
 import BS from 'react-bootstrap'
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 
 import {categories} from "./Home.jsx";
 
@@ -31,14 +31,30 @@ export default class NewEntry extends Component {
         this.handleImageChange = this.handleImageChange.bind(this);
         this.renderContent = this.renderContent.bind(this);
 
+        let title = '';
+        let subtitle = '';
+        let image_url = '/images/message.png';
+        this.portionRefs = {};
+
+        let article = Articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
+        if (article) {
+            title = article.title;
+            subtitle = article.subtitle;
+            image_url = article.image_url;
+        }
+
         this.state = {
-            title: '',
-            subtitle: '',
-            image_url: '/images/message.png',
+            title: title,
+            subtitle: subtitle,
+            image_url: image_url,
             data: {}
         };
 
-        this.portionRefs = {};
+        if (article) {
+            article.data.forEach(elem => {
+                this.addPortion(elem.type, elem.content);
+            })
+        }
     }
 
     getValidationState(value, factor = 1) {
@@ -52,20 +68,23 @@ export default class NewEntry extends Component {
     handleTitleChange(e) {
         this.setState({title: e.target.value});
     }
+
     handleSubtitleChange(e) {
         this.setState({subtitle: e.target.value});
     }
+
     handleImageChange(e) {
         this.setState({image_url: e.target.value});
     }
 
-    addPortion(type) {
+    addPortion(type, content = '') {
         let id = new Mongo.ObjectID();
         let newData = this.state.data;
-        let content = '';
         newData[id] = {
             type: type,
-            content: <ArticlePortion ref={instance => {this.portionRefs[id] = instance}} editable key={id} id={id} type={type} data={content} />
+            content: <ArticlePortion ref={instance => {
+                this.portionRefs[id] = instance
+            }} editable key={id} id={id} type={type} data={content}/>
         };
         this.setState({data: newData});
     }
@@ -89,21 +108,21 @@ export default class NewEntry extends Component {
             image_url: this.state.image_url,
             data: content,
         };
-        if(Articles.findOne({_id: new Mongo.ObjectID(articleId)})) {
-            Articles.update({_id: new Mongo.ObjectID(articleId)}, {
-                $set: data
+        if (Articles.findOne({_id: new Mongo.ObjectID(articleId)})) {
+            Meteor.call('articles.update', {
+                articleId: articleId,
+                data: data
             });
         }
         else {
-            Articles.insert({
-                _id: new Mongo.ObjectID(articleId),
-                createdAt: new Date(),
-                owner: Meteor.userId(),
-                username: Meteor.user().username,
-                ...data
+            Meteor.call('articles.insert', {
+                articleId: articleId,
+                data: data
             });
         }
-        FlowRouter.go(buildRequest('article', articleId, {category: category}))
+        FlowRouter.go(buildRequest('article', articleId, {
+            category: category
+        }))
     }
 
     renderHexagonImageInput() {
@@ -162,13 +181,17 @@ export default class NewEntry extends Component {
                             <ArticlePortion key={new Mongo.ObjectID()} type={'sectionTitle'} content={'Edit options'}/>
 
                             <BS.ButtonToolbar className={ButtonStyle}>
-                                <BS.Button bsStyle="info" onClick={() => this.addPortion("sectionTitle")}>Section</BS.Button>
-                                <BS.Button bsStyle="info" onClick={() => this.addPortion("paragraph")}>Paragraph</BS.Button>
-                                {Meteor.user().username === 'admin' ? <BS.Button bsStyle="info" onClick={() => this.addPortion("image")}>Image</BS.Button> : null}
+                                <BS.Button bsStyle="info"
+                                           onClick={() => this.addPortion("sectionTitle")}>Section</BS.Button>
+                                <BS.Button bsStyle="info"
+                                           onClick={() => this.addPortion("paragraph")}>Paragraph</BS.Button>
+                                {Meteor.user().username === 'admin' ? <BS.Button bsStyle="info"
+                                                                                 onClick={() => this.addPortion("image")}>Image</BS.Button> : null}
                                 <BS.Button bsStyle="info" onClick={() => this.addPortion("caption")}>Caption</BS.Button>
                             </BS.ButtonToolbar>
                             <BS.ButtonToolbar className={ButtonStyle}>
-                                <BS.Button bsStyle="success" onClick={() => (this.save(this.props.params.articleId, this.props.params.category))}>Save</BS.Button>
+                                <BS.Button bsStyle="success"
+                                           onClick={() => (this.save(this.props.params.articleId, this.props.params.category))}>Save</BS.Button>
                             </BS.ButtonToolbar>;
                         </Content>
                     </form>
@@ -179,7 +202,6 @@ export default class NewEntry extends Component {
         );
     }
 }
-
 
 
 const ImageURL = styled('h3')`
