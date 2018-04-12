@@ -6,6 +6,7 @@ import {Mongo} from 'meteor/mongo';
 import styled, {css} from 'react-emotion'
 import React, {Component} from 'react';
 import BS from 'react-bootstrap'
+import {withTracker} from 'meteor/react-meteor-data';
 
 import NavBar from '../Navigation/NavBar.jsx'
 import Offset from "../Components/Offset.jsx"
@@ -14,12 +15,12 @@ import {Articles} from '../../api/Articles.js';
 import ArticlePortion from '../Components/ArticlePortion.jsx'
 import {buildRequest} from '../../../lib/router';
 
-export default class Article extends Component {
+class Article extends Component {
 
     constructor(props) {
         super(props);
         try {
-            this.article = Articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
+            this.article = this.props.articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
             this.user = Meteor.users.findOne(Meteor.userId());
             this.isEditable = !!this.user;
             if(this.isEditable) {
@@ -83,7 +84,12 @@ export default class Article extends Component {
         else return (<div/>)
     }
 }
-
+export default withTracker(() => {
+    Meteor.subscribe('articles');
+    return {
+        articles: Articles
+    }
+})(Article);
 
 const SpaceEvenly = css`
     display: flex;

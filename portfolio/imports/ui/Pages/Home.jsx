@@ -118,6 +118,9 @@ class Home extends Component {
 export const categories = ["works", "life", "messages", "contact"];
 
 export default withTracker(() => {
+
+    Meteor.subscribe('articles');
+
     return {
         worksArticles: Articles.find({category: categories[0]}).fetch(),
         lifeArticles: Articles.find({category: categories[1]}).fetch(),

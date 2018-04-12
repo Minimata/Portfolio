@@ -6,9 +6,10 @@ body {
 
 #login-dropdown-list {
     position: fixed;
-    top: 99px;
+    top: unset;
     left: unset;
-    right: 10px !important;
+    bottom: 109px;
+    right: 10px;
     background-color: whitesmoke;
     z-index: 1200 !important;
     visibility: visible;
@@ -16,7 +17,6 @@ body {
 
 @media (max-width: 767px) {
     #login-dropdown-list {
-        top: unset;
-        bottom: 124px;
+        bottom: 159px;
     }
 }

@@ -7,6 +7,7 @@ import React, {Component} from 'react';
 import styled, {css} from 'react-emotion'
 import BS from 'react-bootstrap'
 import {Meteor} from 'meteor/meteor';
+import {withTracker} from 'meteor/react-meteor-data';
 
 import {categories} from "./Home.jsx";
 
@@ -18,7 +19,7 @@ import ArticlePortion from '../Components/ArticlePortion.jsx'
 import {buildRequest} from "../../../lib/router";
 
 
-export default class NewEntry extends Component {
+class NewEntry extends Component {
 
     constructor(props) {
         super(props);
@@ -36,7 +37,7 @@ export default class NewEntry extends Component {
         let image_url = '/images/message.png';
         this.portionRefs = {};
 
-        let article = Articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
+        let article = this.props.articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
         if (article) {
             title = article.title;
             subtitle = article.subtitle;
@@ -108,7 +109,7 @@ export default class NewEntry extends Component {
             image_url: this.state.image_url,
             data: content,
         };
-        if (Articles.findOne({_id: new Mongo.ObjectID(articleId)})) {
+        if (this.props.articles.findOne({_id: new Mongo.ObjectID(articleId)})) {
             Meteor.call('articles.update', {
                 articleId: articleId,
                 data: data
@@ -202,6 +203,12 @@ export default class NewEntry extends Component {
         );
     }
 }
+export default withTracker(() => {
+    Meteor.subscribe('articles');
+    return {
+        articles: Articles
+    }
+})(NewEntry);
 
 
 const ImageURL = styled('h3')`
