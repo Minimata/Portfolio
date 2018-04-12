@@ -1,4 +1,0 @@
-[[[[[ C:\Users\alexandre\Documents\Meteor\tuto_todolist ]]]]]
-
-=> Started proxy.
-Terminer le programme de commandes (O/N)ÿ? 
