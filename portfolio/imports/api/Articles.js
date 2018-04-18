@@ -17,11 +17,13 @@ Meteor.methods({
     'articles.insert'(article) {
         check(article.data.title, String);
         check(article.data.subtitle, String);
-        if(article.data.data[0].type === 'image') {
-            check(article.data.data[0].content.alt, String);
-        }
-        else {
-            check(article.data.data[0].content, String);
+        if(article.data.data[0]) {
+            if(article.data.data[0].type === 'image') {
+                check(article.data.data[0].content.alt, String);
+            }
+            else {
+                check(article.data.data[0].content, String);
+            }
         }
 
         // Make sure the user is logged in before inserting a task
