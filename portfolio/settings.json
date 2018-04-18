@@ -1,0 +1,7 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb://Minimata:Minimata94!@ds247439.mlab.com:47439/meteor"
+    }
+  }
+}

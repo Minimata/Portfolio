@@ -54,17 +54,20 @@ export default class FloatingButton extends Component {
 
 const FloatButton = styled('a')`
     position: fixed;
-    right: 50px;
-    bottom: 50px;
+    right: 150px;
+    bottom: 150px;
+    width: 70px;
+    height: 70px;
     
     @media(max-width: 768px) {
         bottom: 100px;
+        right: 50px;
+        width: 50px;
+        height: 50px;
     }
     
     cursor: pointer;
     
-    width: 50px;
-    height: 50px;
     
     background-color: rgb(42, 43, 44);
     color: #9d9d9d;
