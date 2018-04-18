@@ -122,10 +122,10 @@ export default withTracker(() => {
     Meteor.subscribe('articles');
 
     return {
-        worksArticles: Articles.find({category: categories[0]}).fetch(),
-        lifeArticles: Articles.find({category: categories[1]}).fetch(),
-        messagesArticles: Articles.find({category: categories[2]}).fetch(),
-        contactArticles: Articles.find({category: categories[3]}).fetch(),
+        worksArticles: Articles.find({category: categories[0]}, {sort: {lastModified: -1}}).fetch(),
+        lifeArticles: Articles.find({category: categories[1]}, {sort: {lastModified: -1}}).fetch(),
+        messagesArticles: Articles.find({category: categories[2]}, {sort: {lastModified: -1}}).fetch(),
+        contactArticles: Articles.find({category: categories[3]}, {sort: {lastModified: -1}}).fetch(),
         currentUser: Meteor.user(),
     };
 })(Home);
