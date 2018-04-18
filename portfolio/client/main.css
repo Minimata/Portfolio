@@ -8,8 +8,8 @@ body {
     position: fixed;
     top: unset;
     left: unset;
-    bottom: 109px;
-    right: 10px;
+    bottom: 219px;
+    right: 75px;
     background-color: whitesmoke;
     z-index: 1200 !important;
     visibility: visible;
@@ -17,6 +17,7 @@ body {
 
 @media (max-width: 767px) {
     #login-dropdown-list {
-        bottom: 159px;
+        bottom: 149px;
+        right: 10px;
     }
 }
