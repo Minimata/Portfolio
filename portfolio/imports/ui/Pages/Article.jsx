@@ -23,7 +23,7 @@ class Article extends Component {
             this.article = this.props.articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
             this.user = Meteor.users.findOne(Meteor.userId());
             this.isEditable = !!this.user;
-            if(this.isEditable) {
+            if (this.isEditable) {
                 this.isEditable = this.user.username === this.article.username || this.user.username === 'admin';
             }
         }
@@ -39,11 +39,15 @@ class Article extends Component {
     }
 
     renderContent(content) {
-        return content.map((part) => {
-            let id = new Mongo.ObjectID();
-            //console.log(part);
-            return <ArticlePortion key={id} id={id} type={part.type} data={part.content}/>
-        });
+        return content
+            .filter(part => {
+                if (part) return true;
+                return false;
+            })
+            .map((part) => {
+                let id = new Mongo.ObjectID();
+                return <ArticlePortion key={id} id={id} type={part.type} data={part.content}/>
+            });
     }
 
     deleteArticle(articleId) {
@@ -63,13 +67,16 @@ class Article extends Component {
                             {
                                 this.isEditable ?
                                     <BS.ButtonToolbar className={SpaceEvenly}>
-                                        <BS.Button bsStyle="info" onClick={() => FlowRouter.go(buildRequest('new', this.props.params.articleId, {category: this.props.params.category}))}>Edit</BS.Button>
-                                        <BS.Button bsStyle="danger" onClick={() => (this.deleteArticle(this.props.params.articleId))}>Delete</BS.Button>
+                                        <BS.Button bsStyle="info"
+                                                   onClick={() => FlowRouter.go(buildRequest('new', this.props.params.articleId, {category: this.props.params.category}))}>Edit</BS.Button>
+                                        <BS.Button bsStyle="danger"
+                                                   onClick={() => (this.deleteArticle(this.props.params.articleId))}>Delete</BS.Button>
                                     </BS.ButtonToolbar> : null
                             }
-                            <ArticlePortion id={new Mongo.ObjectID()} type={'title'} data={this.article.title} />
-                            <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} data={this.article.subtitle} />
-                            <ArticlePortion id={new Mongo.ObjectID()} type={'owner'} data={this.article.username === 'admin' ? 'Alexandre' : this.article.username} />
+                            <ArticlePortion id={new Mongo.ObjectID()} type={'title'} data={this.article.title}/>
+                            <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} data={this.article.subtitle}/>
+                            <ArticlePortion id={new Mongo.ObjectID()} type={'owner'}
+                                            data={this.article.username === 'admin' ? 'Alexandre' : this.article.username}/>
                         </Header>
 
                         <Content>
@@ -84,6 +91,7 @@ class Article extends Component {
         else return (<div/>)
     }
 }
+
 export default withTracker(() => {
     Meteor.subscribe('articles');
     return {

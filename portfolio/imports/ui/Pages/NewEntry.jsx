@@ -31,6 +31,7 @@ class NewEntry extends Component {
         this.handleSubtitleChange = this.handleSubtitleChange.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
         this.renderContent = this.renderContent.bind(this);
+        this.removePortion = this.removePortion.bind(this);
 
         let title = '';
         let subtitle = '';
@@ -53,7 +54,9 @@ class NewEntry extends Component {
 
         if (article) {
             article.data.forEach(elem => {
-                this.addPortion(elem.type, elem.content);
+                if (elem) {
+                    this.addPortion(elem.type, elem.content);
+                }
             })
         }
     }
@@ -85,8 +88,14 @@ class NewEntry extends Component {
             type: type,
             content: <ArticlePortion ref={instance => {
                 this.portionRefs[id] = instance
-            }} editable key={id} id={id} type={type} data={content}/>
+            }} editable key={id} id={id} type={type} data={content} deleteFunc={this.removePortion}/>
         };
+        this.setState({data: newData});
+    }
+
+    removePortion(id) {
+        let newData = this.state.data;
+        delete newData[id];
         this.setState({data: newData});
     }
 
@@ -100,8 +109,14 @@ class NewEntry extends Component {
 
     save(articleId, category) {
         //console.log(this.state.data, this.portionRefs);
-        let content = Object.values(this.portionRefs).map(portion => (portion.getData()));
-        //console.log(content);
+        let content = Object.values(this.portionRefs)
+            .filter(portion => {
+                if (portion) return true;
+                return false;
+            })
+            .map(portion => {
+                return portion.getData();
+            });
         let data = {
             category: category,
             title: this.state.title,
@@ -203,6 +218,7 @@ class NewEntry extends Component {
         );
     }
 }
+
 export default withTracker(() => {
     Meteor.subscribe('articles');
     return {

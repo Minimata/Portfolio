@@ -3,7 +3,8 @@
  */
 
 import React, {Component} from 'react';
-import styled from 'react-emotion'
+import BS from 'react-bootstrap'
+import styled, {css} from 'react-emotion'
 import Textarea from "react-textarea-autosize";
 
 export default class ArticlePortion extends Component {
@@ -25,6 +26,8 @@ export default class ArticlePortion extends Component {
         this.imageEditable = this.imageEditable.bind(this);
         this.captionEditable = this.captionEditable.bind(this);
         this.getData = this.getData.bind(this);
+        this.deleteButton = this.deleteButton.bind(this);
+        this.remove = this.remove.bind(this);
 
         this.contentTypes = {
             "title": (data) => {
@@ -61,7 +64,7 @@ export default class ArticlePortion extends Component {
     }
 
     componentDidMount() {
-        if(this.props.type === 'image') {
+        if (this.props.type === 'image') {
             this.setState({
                 value: this.props.data.alt,
                 url: this.props.data.url
@@ -77,24 +80,54 @@ export default class ArticlePortion extends Component {
         this.setState({url: e.target.value});
     }
 
+    remove() {
+        this.props.deleteFunc(this.props.id);
+    }
+
+    deleteButton() {
+        return (
+            <BS.Button bsStyle="danger"
+                       onClick={this.remove}>
+                <BS.Glyphicon glyph="remove"/>
+            </BS.Button>
+
+        );
+    }
+
     titleEditable() {
-        return <Title><Textarea autoFocus className={'form-control'} value={this.state.value}
-                                onChange={this.handleValueChanged}/></Title>;
+        return (
+            <Title>
+                <Textarea autoFocus className={'form-control'} value={this.state.value}
+                          onChange={this.handleValueChanged}/>
+            </Title>
+        );
     }
 
     subtitleEditable() {
-        return <Subtitle><Textarea autoFocus className={'form-control'} value={this.state.value}
-                                   onChange={this.handleValueChanged}/></Subtitle>;
+        return (<Subtitle>
+            <Textarea autoFocus className={'form-control'} value={this.state.value}
+                      onChange={this.handleValueChanged}/>
+            </Subtitle>
+        );
     }
 
     sectionTitleEditable() {
-        return <SectionTitle><Textarea autoFocus className={'form-control'} value={this.state.value}
-                                       onChange={this.handleValueChanged}/></SectionTitle>;
+        return (
+            <SectionTitle>
+                <Textarea autoFocus className={'form-control'} value={this.state.value}
+                          onChange={this.handleValueChanged}/>
+                {this.deleteButton()}
+            </SectionTitle>
+        );
     }
 
     paragraphEditable() {
-        return <Paragraph><Textarea autoFocus className={'form-control'} value={this.state.value}
-                                    onChange={this.handleValueChanged}/></Paragraph>;
+        return (
+            <Paragraph><Textarea autoFocus className={'form-control'} value={this.state.value}
+                                 onChange={this.handleValueChanged}/>
+                {this.deleteButton()}
+            </Paragraph>
+        );
     }
 
     imageEditable() {
@@ -110,13 +143,18 @@ export default class ArticlePortion extends Component {
                           placeholder={'Description'}
                           value={this.state.value}
                           onChange={this.handleValueChanged}/>
+                {this.deleteButton()}
             </Paragraph>
         );
     }
 
     captionEditable() {
-        return <Caption><Textarea autoFocus className={'form-control'} value={this.state.value}
-                                  onChange={this.handleValueChanged}/></Caption>;
+        return (
+            <Caption><Textarea autoFocus className={'form-control'} value={this.state.value}
+                               onChange={this.handleValueChanged}/>
+                {this.deleteButton()}
+            </Caption>
+        );
     }
 
     getData() {
@@ -142,6 +180,11 @@ export default class ArticlePortion extends Component {
         }
     }
 }
+
+const FlexRow = css`
+    display: flex;
+    justify-content: space-between;
+`;
 
 const Title = styled('h1')`
     padding-top: 30px;
@@ -187,17 +230,23 @@ const Owner = styled('p')`
 `;
 
 const SectionTitle = styled('h4')`
+    ${FlexRow}
+
     padding-top: 40px;
     padding-bottom: 10px;
 `;
 
 const Paragraph = styled('div')`
+    ${FlexRow}
+
     margin: 0;
     padding-top: 30px;
     padding-bottom: 30px;
 `;
 
 const Caption = styled('div')`
+    ${FlexRow}
+
     text-align: center;
     padding-top: 20px;
     padding-bottom: 50px;
