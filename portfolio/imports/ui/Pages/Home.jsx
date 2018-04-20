@@ -139,8 +139,7 @@ export default withTracker(() => {
 
 
 const HexGrid = styled('ul')`
-    display: flex;
-    flex-wrap: wrap;
+    display: block;
     font-size: 15px;
     list-style-type: none;
     font-family: "Poppins", sans-serif;
