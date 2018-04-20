@@ -192,7 +192,7 @@ const FlexRow = css`
 `;
 
 const overflow = css`
-    word-break: break-all;
+    word-break: break-word;
     overflow-wrap: break-word;
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
