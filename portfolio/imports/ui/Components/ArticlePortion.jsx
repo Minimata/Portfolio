@@ -46,7 +46,7 @@ export default class ArticlePortion extends Component {
                 return (<Paragraph>{data}</Paragraph>)
             },
             "image": (data) => {
-                return (<img src={data.url} alt={data.alt}/>)
+                return (<img className={Image} src={data.url} alt={data.alt}/>)
             },
             "caption": (data) => {
                 return (<Caption>{data}</Caption>)
@@ -181,12 +181,28 @@ export default class ArticlePortion extends Component {
     }
 }
 
+const Image = css`
+    object-fit: contain;
+    max-height: 600px;
+`;
+
 const FlexRow = css`
     display: flex;
     justify-content: space-between;
 `;
 
+const overflow = css`
+    word-break: break-all;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -o-hyphens: auto;
+    hyphens: auto;
+`;
+
 const Title = styled('h1')`
+    ${overflow}
     padding-top: 30px;
     padding-bottom: 10px
 
@@ -201,6 +217,7 @@ const Title = styled('h1')`
 `;
 
 const Subtitle = styled('h2')`
+    ${overflow}
     padding-top: 10px;
     padding-bottom: 5px
     
@@ -231,6 +248,7 @@ const Owner = styled('p')`
 
 const SectionTitle = styled('h4')`
     ${FlexRow}
+    ${overflow}
 
     padding-top: 40px;
     padding-bottom: 10px;
@@ -238,6 +256,7 @@ const SectionTitle = styled('h4')`
 
 const Paragraph = styled('div')`
     ${FlexRow}
+    ${overflow}
 
     margin: 0;
     padding-top: 30px;
@@ -246,6 +265,7 @@ const Paragraph = styled('div')`
 
 const Caption = styled('div')`
     ${FlexRow}
+    ${overflow}
 
     text-align: center;
     padding-top: 20px;
