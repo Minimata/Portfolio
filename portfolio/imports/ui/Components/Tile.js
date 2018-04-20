@@ -3,13 +3,31 @@ import styled, {css} from 'react-emotion'
 import BS from 'react-bootstrap'
 
 export default class Tile extends Component {
-    render() {
-        return (
-            <Hexagon>
+    renderHex(outsideLink) {
+        if(outsideLink) {
+            return (
+                <Hexagon>
+                    <HexLink color={this.props.color ? this.props.hex.color : 'whitesmoke'}
+                             backColor={this.props.backColor ? this.props.hex.backColor : 'rgba(0, 8, 16, 0.8)'}
+                             href={this.props.link}
+                             target={this.props.target ? this.props.target : '_blank'}>
+                        <HexImg
+                            src={this.props.image}
+                            alt={this.props.title}/>
+                        <HexTitle>{this.props.title}</HexTitle>
+                        <HexSubtitle>
+                            {this.props.subtitle}
+                        </HexSubtitle>
+                    </HexLink>
+                </Hexagon>
+            )
+        }
+        else {
+            return (<Hexagon>
                 <HexLink color={this.props.color ? this.props.hex.color : 'whitesmoke'}
                          backColor={this.props.backColor ? this.props.hex.backColor : 'rgba(0, 8, 16, 0.8)'}
                          href={''}
-                         onClick={() => (FlowRouter.go(this.props.link))}>
+                         onClick={() => (this.props.outsideLink ? '' : FlowRouter.go(this.props.link))}>
                     <HexImg
                         src={this.props.image}
                         alt={this.props.title}/>
@@ -18,8 +36,12 @@ export default class Tile extends Component {
                         {this.props.subtitle}
                     </HexSubtitle>
                 </HexLink>
-            </Hexagon>
-        );
+            </Hexagon>)
+        }
+    }
+
+    render() {
+        return this.renderHex(this.props.outsideLink);
     }
 }
 

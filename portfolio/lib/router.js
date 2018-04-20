@@ -16,13 +16,6 @@ export function buildRequest(name, param, queryParams) {
     return query.slice(0, -1);  //remove last '&'
 }
 
-
-const mount2 = withOptions({
-    rootId: 'render-target',
-    rootProps: {'className': ''}
-}, mount);
-
-
 FlowRouter.route('/', {
     name: 'home',
     action() {

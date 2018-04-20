@@ -40,12 +40,12 @@ class Home extends Component {
 
                 <HexGrid>
                     {this.renderArticles(this.props.worksArticles, categories[0])}
-                    {this.props.currentUser ?
-                        this.props.currentUser.username === "admin" ?
+                    {Meteor.user() ?
+                        Meteor.user().username === "admin" ?
                             <Tile key={1} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
                                   link={buildRequest('new', new Mongo.ObjectID(), {
                                       category: categories[0],
-                                      username: this.props.currentUser.username
+                                      username: Meteor.user().username
                                   })}/> : ''
                         : ''
                     }
@@ -57,12 +57,12 @@ class Home extends Component {
 
                 <HexGrid>
                     {this.renderArticles(this.props.lifeArticles, categories[1])}
-                    {this.props.currentUser ?
-                        this.props.currentUser.username === "admin" ?
-                            <Tile key={2} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
+                    {Meteor.user() ?
+                        Meteor.user().username === "admin" ?
+                            <Tile key={101} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
                                   link={buildRequest('new', new Mongo.ObjectID(), {
                                       category: categories[1],
-                                      username: this.props.currentUser.username
+                                      username: Meteor.user().username
                                   })}/> : ''
                         : ''
                     }
@@ -74,15 +74,15 @@ class Home extends Component {
 
                 <HexGrid>
                     {this.renderArticles(this.props.messagesArticles, categories[2])}
-                    {this.props.currentUser ?
-                        <Tile key={3} title={"New message"} subtitle={"Message me something !"}
+                    {Meteor.user() ?
+                        <Tile key={201} title={"New message"} subtitle={"Message me something !"}
                               image={"images/plus_icon.png"}
                               link={buildRequest('new', new Mongo.ObjectID(), {
                                   category: categories[2],
-                                  username: this.props.currentUser.username
+                                  username: Meteor.user().username
                               })}/> :
 
-                        <Tile key={4} title={"New message"} subtitle={"Create an account first"}
+                        <Tile key={202} title={"New message"} subtitle={"Create an account first"}
                               image={"images/plus_icon.png"}
                               link={''}/>
                     }
@@ -93,17 +93,27 @@ class Home extends Component {
                 </Separator>
 
                 <HexGrid>
-                    {this.renderArticles(this.props.contactArticles, categories[3])}
-                    {this.props.currentUser ?
-                        this.props.currentUser.username === "admin" ?
-                            <Tile key={5} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
-                                  currentUser={this.props.currentUser}
-                                  link={buildRequest('new', new Mongo.ObjectID(), {
-                                      category: categories[3],
-                                      username: this.props.currentUser.username
-                                  })}/> : ''
-                        : ''
-                    }
+                    <Tile key={301} title={"CV"} subtitle={"Link to my CV files"}
+                          image={"images/CV.jpg"}
+                          link={'https://drive.google.com/drive/folders/1T_ynkRATQmdLY1OOGKxRT2hfE_rfLZJe?usp=sharing'}
+                          outsideLink
+                    />
+                    <Tile key={302} title={"Twitter"} subtitle={"@EpicMinimata"}
+                          image={"images/Twitter.png"}
+                          link={'https://twitter.com/EpicMinimata'}
+                          outsideLink
+                    />
+                    <Tile key={303} title={"Linkedin"} subtitle={"Because not everything is on Twitter"}
+                          image={"images/linkedin.png"}
+                          link={'https://www.linkedin.com/in/alexandre-serex-116428113/'}
+                          outsideLink
+                    />
+                    <Tile key={304} title={"My gmail"} subtitle={"serex.alexandre@gmail.com"}
+                          image={"images/gmail.jpg"}
+                          link={'mailto:serex.alexandre@gmail.com'}
+                          outsideLink
+                          target={'_self'}
+                    />
                 </HexGrid>
 
                 <FloatingButton/>
