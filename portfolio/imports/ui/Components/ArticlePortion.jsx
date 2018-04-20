@@ -39,6 +39,9 @@ export default class ArticlePortion extends Component {
             "owner": (data) => {
                 return (<Owner>Written by {data}</Owner>)
             },
+            "timeEdit": (data) => {
+                return (<TimeEdit>{data}</TimeEdit>)
+            },
             "sectionTitle": (data) => {
                 return (<SectionTitle className={overflow}>{data}</SectionTitle>)
             },
@@ -233,6 +236,22 @@ const Subtitle = styled('h2')`
 
 const Owner = styled('p')`
     padding-top: 5px;
+    padding-bottom: 10px
+    
+    font-size: 14px;
+    font-weight: 200;
+    font-style: italic;
+    line-height: 1.14;
+    letter-spacing: -.01em;
+    
+    @media(max-width: 768px) {
+        font-size: 24px;
+    }
+`;
+
+
+const TimeEdit = styled('p')`
+    padding-top: 0;
     padding-bottom: 10px
     
     font-size: 14px;
