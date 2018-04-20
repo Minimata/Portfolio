@@ -40,16 +40,16 @@ export default class ArticlePortion extends Component {
                 return (<Owner>Written by {data}</Owner>)
             },
             "sectionTitle": (data) => {
-                return (<SectionTitle>{data}</SectionTitle>)
+                return (<SectionTitle className={overflow}>{data}</SectionTitle>)
             },
             "paragraph": (data) => {
-                return (<Paragraph>{data}</Paragraph>)
+                return (<Paragraph className={overflow}>{data}</Paragraph>)
             },
             "image": (data) => {
                 return (<img className={Image} src={data.url} alt={data.alt}/>)
             },
             "caption": (data) => {
-                return (<Caption>{data}</Caption>)
+                return (<Caption className={overflow}>{data}</Caption>)
             },
         };
 
@@ -248,7 +248,6 @@ const Owner = styled('p')`
 
 const SectionTitle = styled('h4')`
     ${FlexRow}
-    ${overflow}
 
     padding-top: 40px;
     padding-bottom: 10px;
@@ -256,7 +255,6 @@ const SectionTitle = styled('h4')`
 
 const Paragraph = styled('div')`
     ${FlexRow}
-    ${overflow}
 
     margin: 0;
     padding-top: 30px;
@@ -265,12 +263,11 @@ const Paragraph = styled('div')`
 
 const Caption = styled('div')`
     ${FlexRow}
-    ${overflow}
 
     text-align: center;
     padding-top: 20px;
     padding-bottom: 50px;
-    margin: auto 10%;
+    margin: auto 10% !important;
     font-style: italic;
     color: rgb(100, 100, 100);
 `;

@@ -44,8 +44,7 @@ class Home extends Component {
                         Meteor.user().username === "admin" ?
                             <Tile key={1} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
                                   link={buildRequest('new', new Mongo.ObjectID(), {
-                                      category: categories[0],
-                                      username: Meteor.user().username
+                                      category: categories[0]
                                   })}/> : ''
                         : ''
                     }
@@ -61,8 +60,7 @@ class Home extends Component {
                         Meteor.user().username === "admin" ?
                             <Tile key={101} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
                                   link={buildRequest('new', new Mongo.ObjectID(), {
-                                      category: categories[1],
-                                      username: Meteor.user().username
+                                      category: categories[1]
                                   })}/> : ''
                         : ''
                     }
@@ -78,8 +76,7 @@ class Home extends Component {
                         <Tile key={201} title={"New message"} subtitle={"Message me something !"}
                               image={"images/plus_icon.png"}
                               link={buildRequest('new', new Mongo.ObjectID(), {
-                                  category: categories[2],
-                                  username: Meteor.user().username
+                                  category: categories[2]
                               })}/> :
 
                         <Tile key={202} title={"New message"} subtitle={"Create an account first"}
