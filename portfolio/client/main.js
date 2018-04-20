@@ -5,5 +5,4 @@ import { render } from 'react-dom';
 import '../imports/startup/accounts-config.js';
 
 Meteor.startup(() => {
-
 });
