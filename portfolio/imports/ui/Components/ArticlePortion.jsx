@@ -288,5 +288,5 @@ const Caption = styled('div')`
     padding-bottom: 50px;
     margin: auto 10% !important;
     font-style: italic;
-    color: rgb(100, 100, 100);
+    color: rgb(200, 200, 200);
 `;
