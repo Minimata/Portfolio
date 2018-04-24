@@ -73,7 +73,7 @@ class Home extends Component {
                 <HexGrid>
                     {this.renderArticles(this.props.messagesArticles, categories[2])}
                     {Meteor.user() ?
-                        <Tile key={201} title={"New message"} subtitle={"Message me something !"}
+                        <Tile key={201} title={"New message"} subtitle={"Message me !"}
                               image={"images/plus_icon.png"}
                               link={buildRequest('new', new Mongo.ObjectID(), {
                                   category: categories[2]
@@ -213,6 +213,7 @@ const HexGrid = styled('ul')`
     a > h1, a > p{
         width:100%;
         margin: auto !important;
+        color: white;
     }
     li a h1 {
         bottom:50%;

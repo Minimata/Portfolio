@@ -87,8 +87,8 @@ const HexImg = styled('img')`
 `;
 
 const HexText = css`
-    
-    @media(max-width: 500px) {
+    font-size: 1.2em !important;
+    @media(max-width: 768px) {
         font-size: 0.8em !important;
     }
 
