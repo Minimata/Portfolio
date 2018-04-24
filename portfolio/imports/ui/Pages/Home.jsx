@@ -100,12 +100,12 @@ class Home extends Component {
                           link={'https://twitter.com/EpicMinimata'}
                           outsideLink
                     />
-                    <Tile key={303} title={"Linkedin"} subtitle={"Because not everything is on Twitter"}
+                    <Tile key={303} title={"Linkedin"} subtitle={"Professional account"}
                           image={"images/linkedin.png"}
                           link={'https://www.linkedin.com/in/alexandre-serex-116428113/'}
                           outsideLink
                     />
-                    <Tile key={304} title={"My gmail"} subtitle={"serex.alexandre@gmail.com"}
+                    <Tile key={304} title={"My gmail"} subtitle={"serex.alexandre @gmail.com"}
                           image={"images/gmail.jpg"}
                           link={'mailto:serex.alexandre@gmail.com'}
                           outsideLink

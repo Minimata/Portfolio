@@ -208,7 +208,7 @@ class NewEntry extends Component {
                             <BS.ButtonToolbar className={ButtonStyle}>
                                 <BS.Button bsStyle="success"
                                            onClick={() => (this.save(this.props.params.articleId, this.props.params.category))}>Save</BS.Button>
-                            </BS.ButtonToolbar>;
+                            </BS.ButtonToolbar>
                         </Content>
                     </form>
                 </Wrapper>
