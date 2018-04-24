@@ -203,15 +203,27 @@ const HexGrid = styled('ul')`
     
     li img{
         left:-100%; right:-100%;
+        padding:0 5%;
         width: auto; height:100%;
+        -webkit-transition: all .2s ease-out;
+        -ms-transition: all .2s ease-out;
+        transition: all .2s ease-out;
     }
+    
     a > h1, a > p{
         width:100%;
-        padding:0 5%;
         margin: auto !important;
     }
+    li a h1 {
+        bottom:50%;
+        padding-bottom:10%;
+    }
+    li a p{
+        top:50%;
+        padding-top:10%;
+    }
+    
     li h1{
-        bottom:110%;
         font-style:italic;
         font-weight:normal;
         font-size:1.5em;
@@ -228,20 +240,20 @@ const HexGrid = styled('ul')`
         z-index: 1;
         border-bottom:2px solid #fff;
     }
+    
+    //HOVER EFFECT
     li p{
         padding-top:50%;
-        top:110%;
         padding-bottom:50%;
     }
-    
-    
-    // HOVER EFFECT
     li a:hover h1 {
-        bottom:50%;
-        padding-bottom:10%;
+        bottom:110%;
     }
-    li a:hover p{
-        top:50%;
-        padding-top:10%;
+    li a:hover p {
+        top:110%;
     }
+    li a:hover img {
+        transform: scale(1.1);
+    }
+    
 `;

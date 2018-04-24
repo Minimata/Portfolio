@@ -12,6 +12,7 @@
     "bootstrap": "^3.3.7",
     "emotion": "^8.0.12",
     "meteor-node-stubs": "^0.3.2",
+    "moment": "^2.22.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",

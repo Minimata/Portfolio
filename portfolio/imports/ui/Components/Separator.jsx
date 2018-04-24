@@ -14,10 +14,6 @@ export default class Separator extends Component {
                     <Title>
                         {this.props.title}
                     </Title>
-
-                    <Content>
-                        {this.props.children}
-                    </Content>
                 </FullWidthBackground>
             </Element>
         );
@@ -29,7 +25,7 @@ const FullWidthBackground = styled('div')`
     width: 100%;
     background-color: rgb(42, 43, 44);
     color: whitesmoke;
-    padding: 20px
+    padding: 40px
     
     display: flex;
     flex-direction: column;
@@ -37,21 +33,20 @@ const FullWidthBackground = styled('div')`
     & > p {
         font-family: "Poppins", sans-serif;
         margin: 0 auto;
-        padding: 20px 40px;
+        padding: 20px 100px;
     }
     
     
     @media(max-width: 1200px) {
-        padding: 10px;
+        padding: 20px;
         & > p {
-            padding: 10px;
+            padding: 10px 50px;
         }
     }
     
     @media(max-width: 768px) {
         
     }
-    
 `;
 
 const Title = styled('p')`
@@ -59,7 +54,8 @@ const Title = styled('p')`
     font-weight: 300;
     line-height: 1.5;
     
-    border-bottom: 1px solid rgb(100, 100, 100);
+    border-top: 2px solid rgb(100, 100, 100);
+    border-bottom: 2px solid rgb(100, 100, 100);
 `;
 
 const Content = styled('p')`

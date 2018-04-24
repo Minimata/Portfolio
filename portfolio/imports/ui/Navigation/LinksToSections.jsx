@@ -17,11 +17,11 @@ export default class LinksToSections extends Component {
                 <li role={"presentation"} className={pointer}>
                     <Link to="Works" spy={true} smooth={true} offset={-90} duration={275}>
                         <BS.Col className={LinkWrapper} xsHidden>
-                            <BS.Glyphicon glyph="stats">
+                            <BS.Glyphicon glyph="book">
                                 <span className={LinkStyle}> Works</span>
                             </BS.Glyphicon>
                         </BS.Col>
-                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="stats"/></BS.Col>
+                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="book"/></BS.Col>
                     </Link>
                 </li>
                 <li role={"presentation"} className={pointer}>
@@ -37,21 +37,21 @@ export default class LinksToSections extends Component {
                 <li role={"presentation"} className={pointer}>
                     <Link to="Messages" spy={true} smooth={true} offset={-90} duration={275}>
                         <BS.Col className={LinkWrapper} xsHidden>
-                            <BS.Glyphicon glyph="pencil">
+                            <BS.Glyphicon glyph="envelope">
                                 <span className={LinkStyle}> Messages</span>
                             </BS.Glyphicon>
                         </BS.Col>
-                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="pencil"/></BS.Col>
+                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="envelope"/></BS.Col>
                     </Link>
                 </li>
                 <li role={"presentation"} className={pointer}>
                     <Link to="Contact" spy={true} smooth={true} offset={-90} duration={275}>
                         <BS.Col className={LinkWrapper} xsHidden>
-                            <BS.Glyphicon glyph="envelope">
+                            <BS.Glyphicon glyph="pencil">
                                 <span className={LinkStyle}> Contact</span>
                             </BS.Glyphicon>
                         </BS.Col>
-                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="envelope"/></BS.Col>
+                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="pencil"/></BS.Col>
                     </Link>
                 </li>
             </ul>

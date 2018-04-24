@@ -7,8 +7,8 @@ export default class Tile extends Component {
         if(outsideLink) {
             return (
                 <Hexagon>
-                    <HexLink color={this.props.color ? this.props.hex.color : 'whitesmoke'}
-                             backColor={this.props.backColor ? this.props.hex.backColor : 'rgba(0, 8, 16, 0.8)'}
+                    <HexLink color={this.props.color ? this.props.hex.color : defaultColor}
+                             backColor={this.props.backColor ? this.props.hex.backColor : defaultHoverColor}
                              href={this.props.link}
                              target={this.props.target ? this.props.target : '_blank'}>
                         <HexImg
@@ -24,8 +24,8 @@ export default class Tile extends Component {
         }
         else {
             return (<Hexagon>
-                <HexLink color={this.props.color ? this.props.hex.color : 'whitesmoke'}
-                         backColor={this.props.backColor ? this.props.hex.backColor : 'rgba(0, 8, 16, 0.8)'}
+                <HexLink color={this.props.color ? this.props.hex.color : defaultColor}
+                         backColor={this.props.backColor ? this.props.hex.backColor : defaultHoverColor}
                          href={''}
                          onClick={() => (this.props.outsideLink ? '' : FlowRouter.go(this.props.link))}>
                     <HexImg
@@ -45,6 +45,8 @@ export default class Tile extends Component {
     }
 }
 
+const defaultColor = `white`;
+const defaultHoverColor = `rgba(22, 23, 24, 0.55)`;
 
 const Hexagon = styled('li')`
     position:relative;

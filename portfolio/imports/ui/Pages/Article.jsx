@@ -15,6 +15,8 @@ import {Articles} from '../../api/Articles.js';
 import ArticlePortion from '../Components/ArticlePortion.jsx'
 import {buildRequest} from '../../../lib/router';
 
+import moment from 'moment';
+
 class Article extends Component {
 
     constructor(props) {
@@ -78,18 +80,8 @@ class Article extends Component {
                             <ArticlePortion id={new Mongo.ObjectID()} type={'owner'}
                                             data={this.article.username === 'admin' ? 'Alexandre' : this.article.username}/>
                             <ArticlePortion id={new Mongo.ObjectID()} type={'timeEdit'}
-                                            data={"Created " +
-                                            this.article.createdAt.getDay() +
-                                            "." +
-                                            this.article.createdAt.getMonth() +
-                                            "." +
-                                            this.article.createdAt.getFullYear() +
-                                            " - last updated " +
-                                            this.article.lastModified.getDay() +
-                                            "." +
-                                            this.article.lastModified.getMonth() +
-                                            "." +
-                                            this.article.lastModified.getFullYear()}/>
+                                            data={"Created " + new moment(this.article.createdAt).format("DD-MM-YYYY").toString() +
+                                            " - last updated " + new moment(this.article.lastModified).format("DD-MM-YYYY").toString()}/>
                         </Header>
 
                         <Content>

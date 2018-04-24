@@ -63,6 +63,8 @@ const pullRight = css`
 `;
 
 const makeRoom = css`
+    border-bottom: none;
+
     & > * {
         padding: 20px 0;
     }
