@@ -34,9 +34,7 @@ class Home extends Component {
                 <NavBar/>
                 <Offset/>
 
-                <Separator title={"Works"}>
-                    A description of some projects I worked (or keep working) on.
-                </Separator>
+                <Separator title={"Works"} />
 
                 <HexGrid>
                     {this.renderArticles(this.props.worksArticles, categories[0])}
@@ -50,9 +48,7 @@ class Home extends Component {
                     }
                 </HexGrid>
 
-                <Separator title={"Life"}>
-                    Some moments of my life and education. It's the blog part of this website.
-                </Separator>
+                <Separator title={"Life"} />
 
                 <HexGrid>
                     {this.renderArticles(this.props.lifeArticles, categories[1])}
@@ -66,28 +62,7 @@ class Home extends Component {
                     }
                 </HexGrid>
 
-                <Separator title={"Messages"}>
-                    What do you think about me ? You can write it down and it will be instantly visible for everyone.
-                </Separator>
-
-                <HexGrid>
-                    {this.renderArticles(this.props.messagesArticles, categories[2])}
-                    {Meteor.user() ?
-                        <Tile key={201} title={"New message"} subtitle={"Message me !"}
-                              image={"images/plus_icon.png"}
-                              link={buildRequest('new', new Mongo.ObjectID(), {
-                                  category: categories[2]
-                              })}/> :
-
-                        <Tile key={202} title={"New message"} subtitle={"Create an account first"}
-                              image={"images/plus_icon.png"}
-                              link={''}/>
-                    }
-                </HexGrid>
-
-                <Separator title={"Contact"}>
-                    Here's how you can contact me of course.
-                </Separator>
+                <Separator title={"Contact"} />
 
                 <HexGrid>
                     <Tile key={301} title={"CV"} subtitle={"Link to my CV files"}
@@ -111,6 +86,23 @@ class Home extends Component {
                           outsideLink
                           target={'_self'}
                     />
+                </HexGrid>
+
+                <Separator title={"Messages"} />
+
+                <HexGrid>
+                    {this.renderArticles(this.props.messagesArticles, categories[2])}
+                    {Meteor.user() ?
+                        <Tile key={201} title={"New message"} subtitle={"Message me !"}
+                              image={"images/plus_icon.png"}
+                              link={buildRequest('new', new Mongo.ObjectID(), {
+                                  category: categories[2]
+                              })}/> :
+
+                        <Tile key={202} title={"New message"} subtitle={"Create an account first"}
+                              image={"images/plus_icon.png"}
+                              link={''}/>
+                    }
                 </HexGrid>
 
                 <FloatingButton/>

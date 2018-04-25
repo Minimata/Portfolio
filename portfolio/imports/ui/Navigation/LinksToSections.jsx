@@ -35,16 +35,6 @@ export default class LinksToSections extends Component {
                     </Link>
                 </li>
                 <li role={"presentation"} className={pointer}>
-                    <Link to="Messages" spy={true} smooth={true} offset={-90} duration={275}>
-                        <BS.Col className={LinkWrapper} xsHidden>
-                            <BS.Glyphicon glyph="envelope">
-                                <span className={LinkStyle}> Messages</span>
-                            </BS.Glyphicon>
-                        </BS.Col>
-                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="envelope"/></BS.Col>
-                    </Link>
-                </li>
-                <li role={"presentation"} className={pointer}>
                     <Link to="Contact" spy={true} smooth={true} offset={-90} duration={275}>
                         <BS.Col className={LinkWrapper} xsHidden>
                             <BS.Glyphicon glyph="pencil">
@@ -52,6 +42,16 @@ export default class LinksToSections extends Component {
                             </BS.Glyphicon>
                         </BS.Col>
                         <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="pencil"/></BS.Col>
+                    </Link>
+                </li>
+                <li role={"presentation"} className={pointer}>
+                    <Link to="Messages" spy={true} smooth={true} offset={-90} duration={275}>
+                        <BS.Col className={LinkWrapper} xsHidden>
+                            <BS.Glyphicon glyph="envelope">
+                                <span className={LinkStyle}> Messages</span>
+                            </BS.Glyphicon>
+                        </BS.Col>
+                        <BS.Col smHidden mdHidden lgHidden><BS.Glyphicon glyph="envelope"/></BS.Col>
                     </Link>
                 </li>
             </ul>
