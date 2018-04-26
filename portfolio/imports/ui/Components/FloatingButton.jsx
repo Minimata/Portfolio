@@ -43,7 +43,6 @@ export default class FloatingButton extends Component {
         return (
             <div>
                 <FloatButton onClick={this.handleSingUpClick}>
-                    <BS.Glyphicon glyph="off"/>
                 </FloatButton>
                 <span className={this.state.loginOpen ? HiddenA : Hidden} ref={"container"}/>
             </div>
@@ -53,37 +52,14 @@ export default class FloatingButton extends Component {
 
 
 const FloatButton = styled('a')`
-    position: fixed;
-    right: 150px;
-    bottom: 150px;
-    width: 70px;
-    height: 70px;
-    
-    @media(max-width: 768px) {
-        bottom: 100px;
-        right: 50px;
-        width: 50px;
-        height: 50px;
-    }
-    
+    position: absolute;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 2px;
     cursor: pointer;
-    
-    
-    background-color: rgb(42, 43, 44);
-    color: #9d9d9d;
-    border: 2px solid whitesmoke;
-    border-radius: 50%;
-    
-    font-size: 16px;
-    text-decoration: none !important;
-    :hover {
-        color: whitesmoke;
-    }
-    
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    background-color: rgba(42, 43, 44, 0);
 `;
 
 const HiddenA = css`

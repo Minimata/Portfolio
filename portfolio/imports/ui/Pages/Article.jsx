@@ -77,8 +77,7 @@ class Article extends Component {
                             }
                             <ArticlePortion id={new Mongo.ObjectID()} type={'title'} data={this.article.title}/>
                             <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} data={this.article.subtitle}/>
-                            <ArticlePortion id={new Mongo.ObjectID()} type={'owner'}
-                                            data={this.article.username === 'admin' ? 'Alexandre' : this.article.username}/>
+
                             <ArticlePortion id={new Mongo.ObjectID()} type={'timeEdit'}
                                             data={"Created " + new moment(this.article.createdAt).format("DD-MM-YYYY").toString() +
                                             " - last updated " + new moment(this.article.lastModified).format("DD-MM-YYYY").toString()}/>

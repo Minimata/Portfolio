@@ -7,18 +7,9 @@ body {
 
 #login-dropdown-list {
     position: fixed;
-    top: unset;
-    left: unset;
-    bottom: 219px;
-    right: 75px;
+    top: 100px;
+    left: 0;
     background-color: whitesmoke;
     z-index: 1200 !important;
     visibility: visible;
-}
-
-@media (max-width: 767px) {
-    #login-dropdown-list {
-        bottom: 149px;
-        right: 10px;
-    }
 }

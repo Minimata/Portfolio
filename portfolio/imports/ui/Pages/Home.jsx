@@ -28,6 +28,19 @@ class Home extends Component {
         ));
     }
 
+    renderMessages() {
+        return (
+            <HexGrid>
+                {this.renderArticles(this.props.messagesArticles, categories[2])}
+                <Tile key={201} title={"New message"} subtitle={"Message me !"}
+                      image={"images/plus_icon.png"}
+                      link={buildRequest('new', new Mongo.ObjectID(), {
+                          category: categories[2]
+                      })}/>
+            </HexGrid>
+        );
+    }
+
     render() {
         return (
             <div>
@@ -90,20 +103,7 @@ class Home extends Component {
 
                 <Separator title={"Messages"} />
 
-                <HexGrid>
-                    {this.renderArticles(this.props.messagesArticles, categories[2])}
-                    {Meteor.user() ?
-                        <Tile key={201} title={"New message"} subtitle={"Message me !"}
-                              image={"images/plus_icon.png"}
-                              link={buildRequest('new', new Mongo.ObjectID(), {
-                                  category: categories[2]
-                              })}/> :
-
-                        <Tile key={202} title={"New message"} subtitle={"Create an account first"}
-                              image={"images/plus_icon.png"}
-                              link={''}/>
-                    }
-                </HexGrid>
+                {this.renderMessages()}
 
                 <FloatingButton/>
                 <Offset/>

@@ -26,17 +26,19 @@ Meteor.methods({
             }
         }
 
-        // Make sure the user is logged in before inserting a task
-        if (! Meteor.userId()) {
-            throw new Meteor.Error('not-authorized');
+        let owner = new Mongo.ObjectID();
+        let username = "Guest";
+        if(Meteor.user()) {
+            owner = Meteor.userId();
+            username = Meteor.user().username;
         }
 
         Articles.insert({
             _id: new Mongo.ObjectID(article.articleId),
             createdAt: new Date(),
             lastModified: new Date(),
-            owner: Meteor.userId(),
-            username: Meteor.user().username,
+            owner: owner,
+            username: username,
             ...(article.data)
         });
     },

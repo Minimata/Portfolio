@@ -176,7 +176,7 @@ class NewEntry extends Component {
                                     <BS.FormControl.Feedback/>
                                 </BS.FormGroup>
                             </Title>
-                            {Meteor.user().username === 'admin' ? this.renderHexagonImageInput() : null}
+                            {Meteor.user() ? this.renderHexagonImageInput() : null}
                             <Subtitle>
                                 <BS.FormGroup bsSize="large"
                                               controlId="formBasicText"
@@ -201,7 +201,7 @@ class NewEntry extends Component {
                                            onClick={() => this.addPortion("sectionTitle")}>Section</BS.Button>
                                 <BS.Button bsStyle="info"
                                            onClick={() => this.addPortion("paragraph")}>Paragraph</BS.Button>
-                                {Meteor.user().username === 'admin' ? <BS.Button bsStyle="info"
+                                {Meteor.user() ? <BS.Button bsStyle="info"
                                                                                  onClick={() => this.addPortion("image")}>Image</BS.Button> : null}
                                 <BS.Button bsStyle="info" onClick={() => this.addPortion("caption")}>Caption</BS.Button>
                             </BS.ButtonToolbar>
