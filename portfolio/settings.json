@@ -4,5 +4,7 @@
       "MONGO_URL": "mongodb://Minimata:Minimata94!@ds247439.mlab.com:47439/meteor"
     }
   },
-  "cdnURL": "https://d3rg8n3psnhobf.cloudfront.net"
+  "public" : {
+    "cdnURL": "https://d3rg8n3psnhobf.cloudfront.net"
+  }
 }

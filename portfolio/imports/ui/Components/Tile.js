@@ -12,7 +12,7 @@ export default class Tile extends Component {
                              href={this.props.link}
                              target={this.props.target ? this.props.target : '_blank'}>
                         <HexImg
-                            src={this.props.image}
+                            src={Meteor.settings.public.cdnURL + this.props.image}
                             alt={this.props.title}/>
                         <HexTitle>{this.props.title}</HexTitle>
                         <HexSubtitle>

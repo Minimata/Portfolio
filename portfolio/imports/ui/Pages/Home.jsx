@@ -79,22 +79,22 @@ class Home extends Component {
 
                 <HexGrid>
                     <Tile key={301} title={"CV"} subtitle={"Link to my CV files"}
-                          image={"images/CV.jpg"}
+                          image={"/images/CV.jpg"}
                           link={'https://drive.google.com/drive/folders/1T_ynkRATQmdLY1OOGKxRT2hfE_rfLZJe?usp=sharing'}
                           outsideLink
                     />
                     <Tile key={302} title={"Twitter"} subtitle={"@EpicMinimata"}
-                          image={"images/twitter.jpg"}
+                          image={"/images/twitter.jpg"}
                           link={'https://twitter.com/EpicMinimata'}
                           outsideLink
                     />
                     <Tile key={303} title={"Linkedin"} subtitle={"Professional account"}
-                          image={"images/linkedin.jpg"}
+                          image={"/images/linkedin.jpg"}
                           link={'https://www.linkedin.com/in/alexandre-serex-116428113/'}
                           outsideLink
                     />
                     <Tile key={304} title={"My gmail"} subtitle={"serex.alexandre @gmail.com"}
-                          image={"images/gmail.jpg"}
+                          image={"/images/gmail.jpg"}
                           link={'mailto:serex.alexandre@gmail.com'}
                           outsideLink
                           target={'_self'}

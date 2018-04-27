@@ -49,7 +49,7 @@ export default class ArticlePortion extends Component {
                 return (<Paragraph className={overflow}>{data}</Paragraph>)
             },
             "image": (data) => {
-                return (<img className={Image} src={data.url} alt={data.alt}/>)
+                return (<img className={Image} src={Meteor.settings.public.cdnURL + data.url} alt={data.alt}/>)
             },
             "caption": (data) => {
                 return (<Caption className={overflow}>{data}</Caption>)
