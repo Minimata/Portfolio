@@ -89,7 +89,7 @@ class Home extends Component {
                           outsideLink
                     />
                     <Tile key={303} title={"Linkedin"} subtitle={"Professional account"}
-                          image={"/images/linkedin.jpg"}
+                          image={"/images/linkedin.png"}
                           link={'https://www.linkedin.com/in/alexandre-serex-116428113/'}
                           outsideLink
                     />
