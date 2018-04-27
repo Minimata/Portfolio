@@ -84,7 +84,7 @@ class Home extends Component {
                           outsideLink
                     />
                     <Tile key={302} title={"Twitter"} subtitle={"@EpicMinimata"}
-                          image={"/images/twitter.jpg"}
+                          image={"/images/Twitter.png"}
                           link={'https://twitter.com/EpicMinimata'}
                           outsideLink
                     />
