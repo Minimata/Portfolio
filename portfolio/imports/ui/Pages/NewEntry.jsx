@@ -35,7 +35,7 @@ class NewEntry extends Component {
 
         let title = '';
         let subtitle = '';
-        let image_url = '/images/message.png';
+        let image_url = '/images/message.jpg';
         this.portionRefs = {};
 
         let article = this.props.articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
