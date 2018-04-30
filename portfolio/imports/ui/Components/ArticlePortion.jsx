@@ -254,14 +254,14 @@ const TimeEdit = styled('p')`
     padding-top: 0;
     padding-bottom: 10px
     
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 200;
     font-style: italic;
     line-height: 1.14;
     letter-spacing: -.01em;
     
-    @media(max-width: 768px) {
-        font-size: 24px;
+    @media(min-width: 768px) {
+        font-size: 18px;
     }
 `;
 
