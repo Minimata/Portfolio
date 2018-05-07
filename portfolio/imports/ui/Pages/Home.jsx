@@ -78,7 +78,7 @@ class Home extends Component {
                 <Separator title={"Contact"} />
 
                 <HexGrid>
-                    <Tile key={301} title={"Resum"} subtitle={"A Link to the files"}
+                    <Tile key={301} title={"Resume"} subtitle={"A Link to the Files"}
                           image={"/images/CV.jpg"}
                           link={'https://drive.google.com/drive/folders/1T_ynkRATQmdLY1OOGKxRT2hfE_rfLZJe?usp=sharing'}
                           outsideLink
