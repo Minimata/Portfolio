@@ -29,7 +29,7 @@ export default class Tile extends Component {
                          href={''}
                          onClick={() => (this.props.outsideLink ? '' : FlowRouter.go(this.props.link))}>
                     <HexImg
-                        src={this.props.image}
+                        src={Meteor.settings.public.cdnURL + this.props.image}
                         alt={this.props.title}/>
                     <HexTitle>{this.props.title}</HexTitle>
                     <HexSubtitle>
