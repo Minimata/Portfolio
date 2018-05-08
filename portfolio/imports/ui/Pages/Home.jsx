@@ -33,7 +33,7 @@ class Home extends Component {
             <HexGrid>
                 {this.renderArticles(this.props.messagesArticles, categories[2])}
                 <Tile key={201} title={"New message"} subtitle={"Message me !"}
-                      image={"images/plus_icon.png"}
+                      image={"/images/plus_icon.png"}
                       link={buildRequest('new', new Mongo.ObjectID(), {
                           category: categories[2]
                       })}/>
@@ -53,7 +53,7 @@ class Home extends Component {
                     {this.renderArticles(this.props.worksArticles, categories[0])}
                     {Meteor.user() ?
                         Meteor.user().username === "admin" ?
-                            <Tile key={1} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
+                            <Tile key={1} title={"New"} subtitle={"Add entry"} image={"/images/plus_icon.png"}
                                   link={buildRequest('new', new Mongo.ObjectID(), {
                                       category: categories[0]
                                   })}/> : ''
@@ -67,7 +67,7 @@ class Home extends Component {
                     {this.renderArticles(this.props.lifeArticles, categories[1])}
                     {Meteor.user() ?
                         Meteor.user().username === "admin" ?
-                            <Tile key={101} title={"New"} subtitle={"Add entry"} image={"images/plus_icon.png"}
+                            <Tile key={101} title={"New"} subtitle={"Add entry"} image={"/images/plus_icon.png"}
                                   link={buildRequest('new', new Mongo.ObjectID(), {
                                       category: categories[1]
                                   })}/> : ''
