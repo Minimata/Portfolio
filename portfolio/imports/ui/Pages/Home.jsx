@@ -19,13 +19,26 @@ import {Articles} from '../../api/Articles.js';
 class Home extends Component {
 
     renderArticles(articles, category) {
-        return articles.map((tile) => (
+        let tiles = articles.map((tile) => (
             <Tile key={tile._id} title={tile.title} subtitle={tile.subtitle} category={category} image={tile.image_url}
                   link={buildRequest('article', tile._id, {
                       category: category
                   })}
                   articleId={tile._id}/>
         ));
+        let i = 0;
+        let newTiles = tiles;
+        let addEmptyAtTheEnd = newTiles.length % 5 === 0 && newTiles.length > 0;
+        tiles.forEach(() => {
+            if(i % 5 === 0 && i !== 0) {
+                newTiles.splice(i, 0, <Tile key={new Mongo.ObjectID()} pusher />);
+            }
+            i++;
+        });
+        if(addEmptyAtTheEnd) {
+            newTiles.push(<Tile key={new Mongo.ObjectID()} pusher />);
+        }
+        return newTiles;
     }
 
     renderMessages() {
@@ -158,8 +171,8 @@ const HexGrid = styled('ul')`
     }
     
     li {
-        width:27.85714285714286%; /* = (100-2.5) / 3.5 */
-        padding-bottom: 32.16760145166612%; /* =  width /0.866 */
+        width:32.5%; /* = (100-2.5) / 3 */
+        padding-bottom: 37.52886836027713%; /* =  width /0.866 */
     }
     
     li:nth-child(3n+2){
@@ -169,8 +182,8 @@ const HexGrid = styled('ul')`
         margin-left:0.5%;
     }
     li:nth-child(6n+4), li:nth-child(6n+5), li:nth-child(6n+6) {
-        margin-top: -6.9285714285%;
-        margin-bottom: -6.9285714285%;
+        margin-top: -8.33%;
+        margin-bottom: -8.33%;
     }
     
     li:nth-child(6n+4):last-child {

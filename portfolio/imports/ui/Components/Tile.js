@@ -41,6 +41,11 @@ export default class Tile extends Component {
     }
 
     render() {
+        if(this.props.pusher) {
+            return (
+                <Hexagon />
+            )
+        }
         return this.renderHex(this.props.outsideLink);
     }
 }
