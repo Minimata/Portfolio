@@ -21,21 +21,24 @@ class Article extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            article: undefined
+        };
+    }
+
+    componentDidMount() {
         try {
-            this.article = this.props.articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
-            this.user = Meteor.users.findOne(Meteor.userId());
-            this.isEditable = !!this.user;
+            let article = this.props.articles.findOne({_id: new Mongo.ObjectID(this.props.params.articleId)});
+            this.isEditable = !!Meteor.user();
             if (this.isEditable) {
-                this.isEditable = this.user.username === this.article.username || this.user.username === 'admin';
+                this.isEditable = Meteor.user().username === article.username || Meteor.user().username === 'admin';
             }
+
+            this.setState({article: article});
         }
         catch (error) {
             console.log(error);
-            FlowRouter.go('notFound');
-        }
-
-        if (!this.article) {
-            console.log("Problem with article number");
             FlowRouter.go('notFound');
         }
     }
@@ -58,41 +61,40 @@ class Article extends Component {
     }
 
     render() {
-        if (this.article) {
             return (
                 <div>
                     <NavBar reduced/>
                     <Offset/>
+                    {this.state.article ?
+                        <Wrapper>
+                            <Header>
+                                {
+                                    this.isEditable ?
+                                        <BS.ButtonToolbar className={SpaceEvenly}>
+                                            <BS.Button bsStyle="info"
+                                                       onClick={() => FlowRouter.go(buildRequest('new', this.props.params.articleId, {category: this.props.params.category}))}>Edit</BS.Button>
+                                            <BS.Button bsStyle="danger"
+                                                       onClick={() => (this.deleteArticle(this.props.params.articleId))}>Delete</BS.Button>
+                                        </BS.ButtonToolbar> : null
+                                }
+                                <ArticlePortion id={new Mongo.ObjectID()} type={'title'} data={this.state.article.title}/>
+                                <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} data={this.state.article.subtitle}/>
 
-                    <Wrapper>
-                        <Header>
-                            {
-                                this.isEditable ?
-                                    <BS.ButtonToolbar className={SpaceEvenly}>
-                                        <BS.Button bsStyle="info"
-                                                   onClick={() => FlowRouter.go(buildRequest('new', this.props.params.articleId, {category: this.props.params.category}))}>Edit</BS.Button>
-                                        <BS.Button bsStyle="danger"
-                                                   onClick={() => (this.deleteArticle(this.props.params.articleId))}>Delete</BS.Button>
-                                    </BS.ButtonToolbar> : null
-                            }
-                            <ArticlePortion id={new Mongo.ObjectID()} type={'title'} data={this.article.title}/>
-                            <ArticlePortion id={new Mongo.ObjectID()} type={'subtitle'} data={this.article.subtitle}/>
+                                <ArticlePortion id={new Mongo.ObjectID()} type={'timeEdit'}
+                                                data={"Created " + new moment(this.state.article.createdAt).format("DD-MM-YYYY").toString() +
+                                                " - last updated " + new moment(this.state.article.lastModified).format("DD-MM-YYYY").toString()}/>
+                            </Header>
 
-                            <ArticlePortion id={new Mongo.ObjectID()} type={'timeEdit'}
-                                            data={"Created " + new moment(this.article.createdAt).format("DD-MM-YYYY").toString() +
-                                            " - last updated " + new moment(this.article.lastModified).format("DD-MM-YYYY").toString()}/>
-                        </Header>
-
-                        <Content>
-                            {this.renderContent(this.article.data)}
-                        </Content>
-                    </Wrapper>
+                            <Content>
+                                {this.renderContent(this.state.article.data)}
+                            </Content>
+                        </Wrapper>
+                        : <div/>
+                    }
 
                     <Offset/>
                 </div>
             );
-        }
-        else return (<div/>)
     }
 }
 
