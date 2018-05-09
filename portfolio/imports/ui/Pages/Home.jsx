@@ -151,6 +151,7 @@ const HexGrid = styled('ul')`
     overflow:hidden;
     width:75%;
     margin: 40px auto 40px auto;
+    padding: 0;
     
     @media(max-width: 1200px) {
         width: 90%;
