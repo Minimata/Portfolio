@@ -60,6 +60,10 @@ class NewEntry extends Component {
             })
         }
     }
+	
+	componentDidMount() {
+	  window.scrollTo(0, 0)
+	}
 
     getValidationState(value, factor = 1) {
         const length = value.length;
