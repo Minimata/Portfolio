@@ -53,6 +53,10 @@ class Home extends Component {
             </HexGrid>
         );
     }
+	
+	componentDidMount() {
+	  window.scrollTo(0, 0)
+	}
 
     render() {
         return (

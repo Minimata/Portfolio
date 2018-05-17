@@ -41,6 +41,8 @@ class Article extends Component {
             console.log(error);
             FlowRouter.go('notFound');
         }
+		
+		window.scrollTo(0, 0)
     }
 
     renderContent(content) {
