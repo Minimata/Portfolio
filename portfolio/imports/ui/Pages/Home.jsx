@@ -116,6 +116,11 @@ class Home extends Component {
                           outsideLink
                           target={'_self'}
                     />
+                    <Tile key={305} title={"Code samples"} subtitle={"of my projects"}
+                          image={"/images/code.png"}
+                          link={'https://drive.google.com/open?id=1z-zNenWW5EVJ-vwQUPyq2Zd7E7eHs1Pa'}
+                          outsideLink
+                    />
                 </HexGrid>
 
                 <Separator title={"Messages"} />
